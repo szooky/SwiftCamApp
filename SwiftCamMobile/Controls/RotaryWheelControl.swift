@@ -49,10 +49,25 @@ class RotaryWheelControl: UIControl {
             button.layer.anchorPoint = CGPoint.init(x: 1.0, y: 0.5)
             button.layer.position = CGPoint.init(x: bounds.width / 2, y: bounds.height / 2)
             button.transform = CGAffineTransform(rotationAngle: angle * CGFloat(component.offset))
+            button.tag = component.offset
+            button.addTarget(self, action: #selector(componentButtonClicked(_:)), for: .touchUpInside)
 
             addSubview(button)
-
         }
+    }
+
+    func rotateToComponent(withIndex index: Int) {
+        let angle = CGFloat.pi * 2 / CGFloat(components.count) * CGFloat(index)
+        let rotation = CGAffineTransform.identity.rotated(by: angle)
+
+        UIView.animate(withDuration: 0.5, animations: {
+            self.transform = rotation
+        })
+    }
+
+    @objc func componentButtonClicked(_ button: UIButton) {
+        print(#function)
+        rotateToComponent(withIndex: button.tag)
     }
 
 
