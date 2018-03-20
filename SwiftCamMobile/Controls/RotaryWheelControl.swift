@@ -43,6 +43,7 @@ class RotaryWheelControl: UIControl {
             let button = UIButton()
             button.setTitle(component.element, for: .normal)
             button.titleLabel?.textAlignment = .left
+
             button.backgroundColor = .blue
 
             button.frame = CGRect(x: 5.0, y: frame.height / 2, width: frame.width / 2, height: 10.0)
@@ -58,7 +59,7 @@ class RotaryWheelControl: UIControl {
 
     func rotateToComponent(withIndex index: Int) {
         let angle = CGFloat.pi * 2 / CGFloat(components.count) * CGFloat(index)
-        let rotation = CGAffineTransform.identity.rotated(by: angle)
+        let rotation = CGAffineTransform.identity.rotated(by: -angle)
 
         UIView.animate(withDuration: 0.5, animations: {
             self.transform = rotation
@@ -66,7 +67,6 @@ class RotaryWheelControl: UIControl {
     }
 
     @objc func componentButtonClicked(_ button: UIButton) {
-        print(#function)
         rotateToComponent(withIndex: button.tag)
     }
 
