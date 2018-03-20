@@ -14,7 +14,7 @@
 		381105C8206117B000F2F3E2 /* SwiftCamMobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381105C7206117B000F2F3E2 /* SwiftCamMobileUITests.swift */; };
 		381105D72061185F00F2F3E2 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381105D62061185F00F2F3E2 /* CameraViewController.swift */; };
 		381105DA2061187B00F2F3E2 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381105D92061187B00F2F3E2 /* UIView+Extensions.swift */; };
-		381105DD206118B100F2F3E2 /* CircularDialControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381105DC206118B100F2F3E2 /* CircularDialControl.swift */; };
+		381105DD206118B100F2F3E2 /* RotaryWheelControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381105DC206118B100F2F3E2 /* RotaryWheelControl.swift */; };
 		381105DF206118DD00F2F3E2 /* LensRingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381105DE206118DD00F2F3E2 /* LensRingControl.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,7 +49,7 @@
 		381105C9206117B000F2F3E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		381105D62061185F00F2F3E2 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		381105D92061187B00F2F3E2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
-		381105DC206118B100F2F3E2 /* CircularDialControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularDialControl.swift; sourceTree = "<group>"; };
+		381105DC206118B100F2F3E2 /* RotaryWheelControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotaryWheelControl.swift; sourceTree = "<group>"; };
 		381105DE206118DD00F2F3E2 /* LensRingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LensRingControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,7 +149,7 @@
 		381105DB2061188000F2F3E2 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				381105DC206118B100F2F3E2 /* CircularDialControl.swift */,
+				381105DC206118B100F2F3E2 /* RotaryWheelControl.swift */,
 				381105DE206118DD00F2F3E2 /* LensRingControl.swift */,
 			);
 			path = Controls;
@@ -289,7 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				381105A8206117B000F2F3E2 /* AppDelegate.swift in Sources */,
-				381105DD206118B100F2F3E2 /* CircularDialControl.swift in Sources */,
+				381105DD206118B100F2F3E2 /* RotaryWheelControl.swift in Sources */,
 				381105DF206118DD00F2F3E2 /* LensRingControl.swift in Sources */,
 				381105DA2061187B00F2F3E2 /* UIView+Extensions.swift in Sources */,
 				381105D72061185F00F2F3E2 /* CameraViewController.swift in Sources */,

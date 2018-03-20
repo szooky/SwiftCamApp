@@ -20,9 +20,11 @@ public class CameraViewController: UIViewController {
     }
 
     private func addControls() {
-        let shutterSpeedValues = ["100"]
-        let shutterSpeedDialFrame = CGRect(x: 20.0, y: 20.0, width: 100.0, height: 100.0)
-        let shutterSpeedDial = CircularDial(frame: shutterSpeedDialFrame, values: shutterSpeedValues )
+        let shutterSpeedValues = ["A", "4000", "2000", "1000", "500", "250"]
+        let shutterSpeedDialFrame = CGRect(origin: view.center, size: CGSize(width: 300.0, height: 300.0))
+
+        let shutterSpeedDial = RotaryWheelControl(frame: shutterSpeedDialFrame, components: shutterSpeedValues )
+        shutterSpeedDial.center = view.center
         view.addSubview(shutterSpeedDial)
     }
 
