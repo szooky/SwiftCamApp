@@ -14,7 +14,7 @@ protocol LensRingDelegate: class {
 
 class LensRingControl: UIScrollView {
     weak var lensRingDelegate: LensRingDelegate?
-    let components = [Int](1...20).map { String($0)}
+    let components: [CameraParameterProtocol]
     var componentButtons = [UIButton]()
     var currentIndex = 0 {
         didSet {
@@ -35,6 +35,15 @@ class LensRingControl: UIScrollView {
 
         return stackView
     }()
+
+    init(components: [CameraParameterProtocol], frame: CGRect) {
+        self.components = components
+        super.init(frame: frame)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     func configureView() {
         backgroundColor = .blue
@@ -65,7 +74,7 @@ class LensRingControl: UIScrollView {
 
         for (index, component) in components.enumerated() {
             let button = UIButton()
-            button.setTitle(component, for: .normal)
+            button.setTitle(component.description, for: .normal)
             button.tag = index
             button.addTarget(self, action: #selector(componentButtonClicked(_:)), for: .touchUpInside)
             componentsStackView.addArrangedSubview(button)

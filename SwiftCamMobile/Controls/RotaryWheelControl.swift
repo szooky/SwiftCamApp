@@ -14,7 +14,7 @@ protocol RotaryWheelDelegate: class {
 
 class RotaryWheelControl: UIControl {
     weak var delegate: RotaryWheelDelegate?
-    var components: [String]
+    var components: [CameraParameterProtocol]
     var currentIndex = 0 {
         didSet {
             delegate?.didChange(selectedIndex: currentIndex)
@@ -24,7 +24,7 @@ class RotaryWheelControl: UIControl {
     var transformationStart: CGAffineTransform?
     var deltaAngle: CGFloat = 0.0
 
-    init(frame: CGRect, components: [String]) {
+    init(frame: CGRect, components: [CameraParameterProtocol]) {
         self.components = components
 
         super.init(frame: frame)
@@ -49,7 +49,7 @@ class RotaryWheelControl: UIControl {
 
         for component in components.enumerated() {
             let button = UIButton()
-            button.setTitle(component.element, for: .normal)
+            button.setTitle(component.element.description, for: .normal)
             button.contentHorizontalAlignment = .left
             button.backgroundColor = .blue
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
@@ -64,7 +64,7 @@ class RotaryWheelControl: UIControl {
             button.addTarget(self, action: #selector(componentButtonClicked(_:)), for: .touchUpInside)
 //            button.isUserInteractionEnabled = false
 
-            if component.element == "A" {
+            if component.element.description == "A" {
                 button.setTitleColor(.orange, for: .normal)
             }
             addSubview(button)
