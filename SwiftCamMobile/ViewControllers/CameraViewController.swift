@@ -16,6 +16,8 @@ public class CameraViewController: UIViewController {
 
     let apetureRingView = LensRingControl()
 
+    let cameraScreenView = UIImageView()
+
     override public func viewDidLoad() {
         if let view = self.view {
             view.backgroundColor = UIColor.white
@@ -25,6 +27,7 @@ public class CameraViewController: UIViewController {
         addCameraControls()
         addCameraSettingsScreen()
         addApetureRing()
+        addCameraScreen()
     }
 
     private func addCameraControls() {
@@ -62,6 +65,14 @@ public class CameraViewController: UIViewController {
 
     }
 
+    private func addCameraScreen() {
+        cameraScreenView.frame = CGRect(x: 20.0, y: 350.0, width: 400, height: 300.0)
+        view.addSubview(cameraScreenView)
+
+        cameraScreenView.image = #imageLiteral(resourceName: "alfaGirl")
+        cameraScreenView.contentMode = .scaleAspectFit
+    }
+
 }
 
 extension CameraViewController: RotaryWheelDelegate {
@@ -73,5 +84,6 @@ extension CameraViewController: RotaryWheelDelegate {
 extension CameraViewController: LensRingDelegate {
     func didScrollTo(selectedIndex: Int) {
         cameraSettingsView.set(apeture: apetureValues[selectedIndex])
+        cameraScreenView.blur(withRadius: 5.0)
     }
 }
