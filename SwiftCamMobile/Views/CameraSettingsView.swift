@@ -61,4 +61,9 @@ class CameraSettingsView: UIView {
         apetureLabel.text = "f" + apeture
     }
 
+    func update(with settings: CameraSettingsModel) {
+        set(apeture: settings.apeture?.description ?? "n/a")
+        set(shutterSpeed: settings.shutterSpeed?.description ?? "n/a")
+    }
+
 }

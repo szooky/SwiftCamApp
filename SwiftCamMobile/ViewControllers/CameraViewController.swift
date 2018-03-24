@@ -9,12 +9,16 @@
 import UIKit
 
 public class CameraViewController: UIViewController {
-    let settings = CameraSettingsModel()
+    var settings = CameraSettingsModel() {
+        didSet {
+            cameraSettingsView.update(with: settings)
+        }
+    }
 
     let cameraSettingsView = CameraSettingsView()
     var apetureRingView: LensRingControl!
     let cameraScreenView = UIImageView()
-
+    let shutterButton = UIButton()
 
     override public func viewDidLoad() {
         if let view = self.view {
@@ -22,17 +26,17 @@ public class CameraViewController: UIViewController {
             view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
 
-
         addCameraControls()
         addCameraSettingsScreen()
         addApetureRing()
         addCameraScreen()
+        addShutterButton()
     }
 
     private func addCameraControls() {
         let shutterSpeedDialFrame = CGRect(origin: view.center, size: CGSize(width: 200.0, height: 200))
 
-        let shutterSpeedDial = RotaryWheelControl(frame: shutterSpeedDialFrame, components: settings.shutterSpeeds )
+        let shutterSpeedDial = RotaryWheelControl(frame: shutterSpeedDialFrame, components: ShutterSpeed.all)
         shutterSpeedDial.center = view.center
         shutterSpeedDial.delegate = self
         view.addSubview(shutterSpeedDial)
@@ -44,13 +48,10 @@ public class CameraViewController: UIViewController {
     }
 
     private func addApetureRing() {
-
         let apetureRingViewFrame = CGRect(x: 20.0, y: 150.0, width: 300, height: 100.0)
-
-        apetureRingView = LensRingControl(components: settings.apetures, frame: apetureRingViewFrame)
+        apetureRingView = LensRingControl(components: Apeture.all, frame: apetureRingViewFrame)
 
         view.addSubview(apetureRingView)
-
 
         apetureRingView.configureView()
         apetureRingView.lensRingDelegate = self
@@ -58,25 +59,42 @@ public class CameraViewController: UIViewController {
     }
 
     private func addCameraScreen() {
-        cameraScreenView.frame = CGRect(x: 20.0, y: 600.0, width: 400, height: 300.0)
+        cameraScreenView.frame = CGRect(x: 20.0, y: 400.0, width: 400, height: 300.0)
         view.addSubview(cameraScreenView)
 
         cameraScreenView.image = #imageLiteral(resourceName: "alfaGirl")
         cameraScreenView.contentMode = .scaleAspectFit
     }
 
+    private func addShutterButton() {
+        shutterButton.setTitle("SHUTTER", for: .normal)
+        shutterButton.setTitleColor(.blue, for: .normal)
+        shutterButton.frame = CGRect(x: 20.0, y: 350.0, width: 100, height: 30)
+        shutterButton.addTarget(self, action: #selector(shutterButtonClicked(_:)), for: .touchUpInside)
+        view.addSubview(shutterButton)
+
+    }
+
+    @objc func shutterButtonClicked(_ button: UIButton) {
+        takePicture()
+    }
+
+    private func takePicture() {
+        cameraScreenView.exposure(withEV: settings.shutterSpeed?.exposure)
+        cameraScreenView.blur(withRadius: settings.apeture?.blurRadius)
+    }
 }
 
 extension CameraViewController: RotaryWheelDelegate {
     func didChange(selectedIndex: Int) {
-        cameraSettingsView.set(shutterSpeed: settings.shutterSpeeds[selectedIndex].description)
-        cameraScreenView.exposure(withEV: 3.0)
+        settings.shutterSpeed = ShutterSpeed.all[selectedIndex]
+        takePicture()
     }
 }
 
 extension CameraViewController: LensRingDelegate {
     func didScrollTo(selectedIndex: Int) {
-        cameraSettingsView.set(apeture: settings.apetures[selectedIndex].description)
-        cameraScreenView.blur(withRadius: 5.0)
+        settings.apeture = Apeture.all[selectedIndex]
+        takePicture()
     }
 }

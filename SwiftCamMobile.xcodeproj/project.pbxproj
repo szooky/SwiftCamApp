@@ -188,8 +188,8 @@
 		387B5DA32066D6D20037D692 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				387B5DA42066D6E00037D692 /* ApetureModel.swift */,
 				387B5DA82066D8560037D692 /* CameraSettingsModel.swift */,
+				387B5DA42066D6E00037D692 /* ApetureModel.swift */,
 				387B5DA62066D6E90037D692 /* ShutterSpeedModel.swift */,
 			);
 			path = Model;

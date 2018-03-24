@@ -33,11 +33,13 @@ extension UIImageView {
         self.image = UIImage(cgImage: cgImage)
     }
 
-    func exposure(withEV ev: CGFloat) {
+    func exposure(withEV ev: CGFloat?) {
+        guard let ev = ev else { return }
         apply(.exposure, withValue: ev, forKey: kCIInputEVKey)
     }
 
-    func blur(withRadius radius: CGFloat) {
+    func blur(withRadius radius: CGFloat?) {
+        guard let radius = radius else { return }
         apply(.blur, withValue: radius, forKey: kCIInputRadiusKey)
     }
 }
