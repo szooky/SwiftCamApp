@@ -63,6 +63,7 @@ class RotaryWheelControl: UIControl {
             button.tag = component.offset
             button.addTarget(self, action: #selector(componentButtonClicked(_:)), for: .touchUpInside)
 //            button.isUserInteractionEnabled = false
+
             if component.element == "A" {
                 button.setTitleColor(.orange, for: .normal)
             }
