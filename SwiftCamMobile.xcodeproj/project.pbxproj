@@ -19,12 +19,11 @@
 		381B6C8220617680009858DF /* CameraSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381B6C8120617680009858DF /* CameraSettingsView.swift */; };
 		381B6C8420617699009858DF /* MacbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381B6C8320617699009858DF /* MacbookView.swift */; };
 		387B5D9F2066C9730037D692 /* CameraScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5D9E2066C9730037D692 /* CameraScreenView.swift */; };
-		387B5DA12066CE520037D692 /* UIImageView+Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DA02066CE520037D692 /* UIImageView+Blur.swift */; };
 		387B5DA52066D6E00037D692 /* ApetureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DA42066D6E00037D692 /* ApetureModel.swift */; };
 		387B5DA72066D6E90037D692 /* ShutterSpeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DA62066D6E90037D692 /* ShutterSpeedModel.swift */; };
 		387B5DA92066D8560037D692 /* CameraSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DA82066D8560037D692 /* CameraSettingsModel.swift */; };
 		387B5DAC2066D97C0037D692 /* CameraParameterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DAB2066D97C0037D692 /* CameraParameterProtocol.swift */; };
-		387B5DAE2066E0F10037D692 /* UImageView+Exposure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DAD2066E0F10037D692 /* UImageView+Exposure.swift */; };
+		387B5DB02066EEF40037D692 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DAF2066EEF40037D692 /* UIImage+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,12 +62,11 @@
 		381B6C8120617680009858DF /* CameraSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSettingsView.swift; sourceTree = "<group>"; };
 		381B6C8320617699009858DF /* MacbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacbookView.swift; sourceTree = "<group>"; };
 		387B5D9E2066C9730037D692 /* CameraScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraScreenView.swift; sourceTree = "<group>"; };
-		387B5DA02066CE520037D692 /* UIImageView+Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Blur.swift"; sourceTree = "<group>"; };
 		387B5DA42066D6E00037D692 /* ApetureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApetureModel.swift; sourceTree = "<group>"; };
 		387B5DA62066D6E90037D692 /* ShutterSpeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutterSpeedModel.swift; sourceTree = "<group>"; };
 		387B5DA82066D8560037D692 /* CameraSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSettingsModel.swift; sourceTree = "<group>"; };
 		387B5DAB2066D97C0037D692 /* CameraParameterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraParameterProtocol.swift; sourceTree = "<group>"; };
-		387B5DAD2066E0F10037D692 /* UImageView+Exposure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UImageView+Exposure.swift"; sourceTree = "<group>"; };
+		387B5DAF2066EEF40037D692 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,8 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				381105D92061187B00F2F3E2 /* UIView+Extensions.swift */,
-				387B5DA02066CE520037D692 /* UIImageView+Blur.swift */,
-				387B5DAD2066E0F10037D692 /* UImageView+Exposure.swift */,
+				387B5DAF2066EEF40037D692 /* UIImage+Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -346,11 +343,10 @@
 				381B6C8420617699009858DF /* MacbookView.swift in Sources */,
 				387B5DA52066D6E00037D692 /* ApetureModel.swift in Sources */,
 				387B5DAC2066D97C0037D692 /* CameraParameterProtocol.swift in Sources */,
-				387B5DA12066CE520037D692 /* UIImageView+Blur.swift in Sources */,
 				381105DD206118B100F2F3E2 /* RotaryWheelControl.swift in Sources */,
 				387B5DA72066D6E90037D692 /* ShutterSpeedModel.swift in Sources */,
 				381105DF206118DD00F2F3E2 /* LensRingControl.swift in Sources */,
-				387B5DAE2066E0F10037D692 /* UImageView+Exposure.swift in Sources */,
+				387B5DB02066EEF40037D692 /* UIImage+Extensions.swift in Sources */,
 				381105DA2061187B00F2F3E2 /* UIView+Extensions.swift in Sources */,
 				381105D72061185F00F2F3E2 /* CameraViewController.swift in Sources */,
 			);
