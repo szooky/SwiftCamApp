@@ -8,8 +8,18 @@
 
 import UIKit
 
+protocol LensRingDelegate: class {
+    func didScrollTo(selectedIndex: Int)
+}
+
 class LensRingControl: UIScrollView {
+    weak var lensRingDelegate: LensRingDelegate?
     let components = ["1.4","1.8","2.0","5.6","5.6","5.6","5.6","5.6", "1.4","1.8","2.0","5.6","5.6","5.6","5.6","5.6"]
+    var currentIndex = 0 {
+        didSet {
+            lensRingDelegate?.didScrollTo(selectedIndex: currentIndex)
+        }
+    }
 
     let gripView: UIView = {
         let view = UIView()
@@ -70,6 +80,7 @@ class LensRingControl: UIScrollView {
         let x = button.frame.origin.x - frame.width / 2
         let point = CGPoint(x: x, y: contentOffset.y)
         setContentOffset(point, animated: true)
+        currentIndex = button.tag
     }
 
 }

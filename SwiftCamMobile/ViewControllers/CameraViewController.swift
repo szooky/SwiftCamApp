@@ -11,6 +11,8 @@ import UIKit
 public class CameraViewController: UIViewController {
     let cameraSettingsView = CameraSettingsView()
     let shutterSpeedValues = ["A", "4000", "2000", "1000", "500", "250", "180x", "125", "60", "30", "15", "8", "4", "2", "1","B"]
+    let apetureValues = ["1.4","1.8","2.0","5.6","5.6","5.6","5.6","5.6", "1.4","1.8","2.0","5.6","5.6","5.6","5.6","5.6"]
+
     let apetureRingView = LensRingControl()
 
     override public func viewDidLoad() {
@@ -55,6 +57,7 @@ public class CameraViewController: UIViewController {
 
 
         apetureRingView.configureView()
+        apetureRingView.lensRingDelegate = self
 
     }
 
@@ -63,5 +66,11 @@ public class CameraViewController: UIViewController {
 extension CameraViewController: RotaryWheelDelegate {
     func didChange(selectedIndex: Int) {
         cameraSettingsView.set(shutterSpeed: shutterSpeedValues[selectedIndex])
+    }
+}
+
+extension CameraViewController: LensRingDelegate {
+    func didScrollTo(selectedIndex: Int) {
+        cameraSettingsView.set(apeture: apetureValues[selectedIndex])
     }
 }
