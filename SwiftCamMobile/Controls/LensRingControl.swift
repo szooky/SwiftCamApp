@@ -14,7 +14,8 @@ protocol LensRingDelegate: class {
 
 class LensRingControl: UIScrollView {
     weak var lensRingDelegate: LensRingDelegate?
-    let components = ["1.4","1.8","2.0","5.6","5.6","5.6","5.6","5.6", "1.4","1.8","2.0","5.6","5.6","5.6","5.6","5.6"]
+    let components = [Int](1...20).map { String($0)}
+    var componentButtons = [UIButton]()
     var currentIndex = 0 {
         didSet {
             lensRingDelegate?.didScrollTo(selectedIndex: currentIndex)
@@ -37,7 +38,7 @@ class LensRingControl: UIScrollView {
 
     func configureView() {
         backgroundColor = .blue
-
+        delegate = self
         configureComponentsStackView()
         configureGripView()
 
@@ -68,6 +69,7 @@ class LensRingControl: UIScrollView {
             button.tag = index
             button.addTarget(self, action: #selector(componentButtonClicked(_:)), for: .touchUpInside)
             componentsStackView.addArrangedSubview(button)
+            componentButtons.append(button)
         }
 
         componentsStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
@@ -77,10 +79,43 @@ class LensRingControl: UIScrollView {
     }
 
     @objc func componentButtonClicked(_ button: UIButton) {
+        scroll(to: button)
+    }
+
+    private func scroll(to button: UIButton?) {
+        guard let button = button else { return }
         let x = button.frame.origin.x - frame.width / 2
         let point = CGPoint(x: x, y: contentOffset.y)
         setContentOffset(point, animated: true)
         currentIndex = button.tag
     }
 
+    private func scrollToNearestButton() {
+        let middlePoint = (frame.origin.x + frame.width) / 2
+        let middlePointWithOffset = contentOffset.x + middlePoint
+
+        var minimumDistance = CGFloat.greatestFiniteMagnitude
+        var closestButton = componentButtons.first
+        for button in componentButtons {
+            let distance = abs(middlePointWithOffset - button.frame.origin.x)
+            if distance < minimumDistance {
+                minimumDistance = distance
+                closestButton = button
+            }
+        }
+        scroll(to: closestButton)
+    }
+
 }
+
+extension LensRingControl: UIScrollViewDelegate {
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        scrollToNearestButton()
+    }
+
+}
+
+
+
+

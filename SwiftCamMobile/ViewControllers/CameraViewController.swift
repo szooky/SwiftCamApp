@@ -11,7 +11,8 @@ import UIKit
 public class CameraViewController: UIViewController {
     let cameraSettingsView = CameraSettingsView()
     let shutterSpeedValues = ["A", "4000", "2000", "1000", "500", "250", "180x", "125", "60", "30", "15", "8", "4", "2", "1","B"]
-    let apetureValues = ["1.4","1.8","2.0","5.6","5.6","5.6","5.6","5.6", "1.4","1.8","2.0","5.6","5.6","5.6","5.6","5.6"]
+    let apetureValues = [Int](1...20).map { String($0)}
+
 
     let apetureRingView = LensRingControl()
 
