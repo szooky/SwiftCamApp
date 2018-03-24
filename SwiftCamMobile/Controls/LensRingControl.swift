@@ -56,6 +56,7 @@ class LensRingControl: UIScrollView {
             let button = UIButton()
             button.setTitle(component, for: .normal)
             button.tag = index
+            button.addTarget(self, action: #selector(componentButtonClicked(_:)), for: .touchUpInside)
             componentsStackView.addArrangedSubview(button)
         }
 
@@ -64,4 +65,11 @@ class LensRingControl: UIScrollView {
         componentsStackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         componentsStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
+
+    @objc func componentButtonClicked(_ button: UIButton) {
+        let x = button.frame.origin.x - frame.width / 2
+        let point = CGPoint(x: x, y: contentOffset.y)
+        setContentOffset(point, animated: true)
+    }
+
 }

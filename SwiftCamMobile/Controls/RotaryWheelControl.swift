@@ -89,7 +89,6 @@ class RotaryWheelControl: UIControl {
         guard currentWheelRotation != 0.0 else { return }
         let delta = abs(partialAngle) / abs(currentWheelRotation)
 
-
         print(currentWheelRotation)
         let closestComponentIndex = Int(delta.rounded())
 
