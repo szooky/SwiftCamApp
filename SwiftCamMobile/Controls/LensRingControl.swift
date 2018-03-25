@@ -53,6 +53,7 @@ class LensRingControl: UIScrollView {
 
 
         self.bringSubview(toFront: componentsStackView)
+        delaysContentTouches = true
     }
 
     private func configureGripView() {
@@ -118,11 +119,9 @@ class LensRingControl: UIScrollView {
 }
 
 extension LensRingControl: UIScrollViewDelegate {
-
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         scrollToNearestButton()
     }
-
 }
 
 

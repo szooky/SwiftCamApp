@@ -12,9 +12,10 @@ protocol RotaryWheelDelegate: class {
     func didChange(selectedIndex: Int)
 }
 
-class RotaryWheelControl: UIControl {
+class RotaryWheelControl: UIView {
     weak var delegate: RotaryWheelDelegate?
     var components: [CameraParameterProtocol]
+
     var currentIndex = 0 {
         didSet {
             delegate?.didChange(selectedIndex: currentIndex)
@@ -31,8 +32,6 @@ class RotaryWheelControl: UIControl {
 
         configureView()
         configureComponents()
-
-
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -62,7 +61,9 @@ class RotaryWheelControl: UIControl {
             button.transform = CGAffineTransform(rotationAngle: angle * CGFloat(component.offset))
             button.tag = component.offset
             button.addTarget(self, action: #selector(componentButtonClicked(_:)), for: .touchUpInside)
-//            button.isUserInteractionEnabled = false
+            button.isUserInteractionEnabled = false
+
+            //button.cancelTracking(with: .)
 
             if component.element.description == "A" {
                 button.setTitleColor(.orange, for: .normal)
@@ -83,14 +84,19 @@ class RotaryWheelControl: UIControl {
     }
 
     private func rotateToClosestComponent() {
+        let singleComponentAngle = CGFloat.pi * 2 / CGFloat(components.count)
         let currentWheelRotation = atan2(transform.b, transform.a)
-        let partialAngle = CGFloat.pi * 2 / CGFloat(components.count)
 
         guard currentWheelRotation != 0.0 else { return }
-        let delta = abs(partialAngle) / abs(currentWheelRotation)
+        let delta = abs(singleComponentAngle) / abs(currentWheelRotation)
 
         print(currentWheelRotation)
-        let closestComponentIndex = Int(delta.rounded())
+        //let closestComponentIndex = Int(delta.rounded())
+
+
+        let x = singleComponentAngle / 2 + 2 * CGFloat.pi - currentWheelRotation
+        let closestComponentIndex = abs(Int(x / currentWheelRotation) % components.count)
+
 
         print(closestComponentIndex)
         rotateToComponent(withIndex: closestComponentIndex)
@@ -106,23 +112,46 @@ class RotaryWheelControl: UIControl {
         return atan2(dy,dx)
     }
 
-    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+//    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+//        let touchPoint = touch.location(in: self)
+//        deltaAngle = getDeltaAngle(for: touchPoint)
+//        transformationStart = transform
+//
+//        return true
+//    }
+//
+//    override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+//        let angleDifference = deltaAngle - getDeltaAngle(for: touch.location(in: self))
+//        transform = transform.rotated(by: -angleDifference)
+//
+//        return true
+//    }
+//
+//    override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+//        rotateToClosestComponent()
+//    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        guard let touch = touches.first else { return }
         let touchPoint = touch.location(in: self)
         deltaAngle = getDeltaAngle(for: touchPoint)
         transformationStart = transform
-
-        return true
     }
 
-    override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        guard let touch = touches.first else { return }
         let angleDifference = deltaAngle - getDeltaAngle(for: touch.location(in: self))
         transform = transform.rotated(by: -angleDifference)
-
-        return true
     }
 
-    override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
         rotateToClosestComponent()
     }
 
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("now")
+    }
 }

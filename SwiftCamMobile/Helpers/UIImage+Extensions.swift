@@ -21,15 +21,13 @@ extension UIImageView {
         filter.setValue(CIImage(image: image), forKey: kCIInputImageKey)
         filter.setValue(value, forKey: key)
 
-        let ciContext  = CIContext(options: nil)
         guard let result = filter.value(forKey: kCIOutputImageKey) as? CIImage else { return }
-
         let boundingRect = CGRect(x: 0,
                                   y: 0,
                                   width: image.size.width,
                                   height: image.size.height)
 
-        guard let cgImage = ciContext.createCGImage(result, from: boundingRect) else { return}
+        guard let cgImage = CIContextSingleton.sharedInstance.ciContext.createCGImage(result, from: boundingRect) else { return}
         self.image = UIImage(cgImage: cgImage)
     }
 
