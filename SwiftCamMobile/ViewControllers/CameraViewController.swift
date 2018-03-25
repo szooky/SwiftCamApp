@@ -17,6 +17,8 @@ public class CameraViewController: UIViewController {
 
     let cameraSettingsView = CameraSettingsView()
     var apetureRingView: LensRingControl!
+    var shutterSpeedDial: RotaryWheelControl!
+    var whiteBalanceDial: RotaryWheelControl!
     let cameraScreenView = CameraScreenView()
     let shutterButton = UIButton()
 
@@ -26,17 +28,28 @@ public class CameraViewController: UIViewController {
             view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
 
-        addCameraControls()
+        addShutterSpeedDial()
         addCameraSettingsScreen()
         addApetureRing()
         addCameraScreen()
         addShutterButton()
+        addWhiteBalanceDial()
     }
 
-    private func addCameraControls() {
-        let shutterSpeedDialFrame = CGRect(origin: view.center, size: CGSize(width: 200.0, height: 200))
+    private func addWhiteBalanceDial() {
+        let whiteBalanceDialFrame = CGRect(origin: CGPoint(x: 200.0, y: 10.0), size: CGSize(width: 200.0, height: 200.0))
 
-        let shutterSpeedDial = RotaryWheelControl(frame: shutterSpeedDialFrame, components: ShutterSpeed.all)
+
+        whiteBalanceDial = RotaryWheelControl(frame: whiteBalanceDialFrame, components: WhiteBalance.all)
+        whiteBalanceDial.delegate = self
+        view.addSubview(whiteBalanceDial)
+    }
+
+    private func addShutterSpeedDial() {
+        let shutterSpeedDialFrame = CGRect(origin: CGPoint(x: 20.0, y: 500.0), size: CGSize(width: 200.0, height: 200.0))
+
+
+        shutterSpeedDial = RotaryWheelControl(frame: shutterSpeedDialFrame, components: ShutterSpeed.all)
         shutterSpeedDial.center = view.center
         shutterSpeedDial.delegate = self
         view.addSubview(shutterSpeedDial)
@@ -78,6 +91,20 @@ public class CameraViewController: UIViewController {
 }
 
 extension CameraViewController: RotaryWheelDelegate {
+    func didChange(rotaryWheel: RotaryWheelControl, selectedIndex: Int) {
+        switch rotaryWheel {
+        case shutterSpeedDial:
+            settings.shutterSpeed = ShutterSpeed.all[selectedIndex]
+        case whiteBalanceDial:
+            settings.whiteBalance = WhiteBalance.all[selectedIndex]
+        default:
+            return
+
+        }
+
+        cameraScreenView.takePhoto(with: settings)
+    }
+
     func didChange(selectedIndex: Int) {
         settings.shutterSpeed = ShutterSpeed.all[selectedIndex]
         cameraScreenView.takePhoto(with: settings)

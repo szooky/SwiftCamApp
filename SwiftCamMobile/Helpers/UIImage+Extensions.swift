@@ -12,6 +12,7 @@ enum CameraFilter: String {
     case exposure = "CIExposureAdjust"
     case gaussianBlur = "CIGaussianBlur"
     case motionBlur = "CIMotionBlur"
+    case temperatureAndTint = "CITemperatureAndTint"
 }
 
 extension UIImageView {
@@ -45,5 +46,11 @@ extension UIImageView {
     func motionBlur(withRadius radius: CGFloat?) {
         guard let radius = radius else { return }
         apply(.motionBlur, withValue: radius, forKey: kCIInputRadiusKey)
+    }
+
+    func whiteBalance(temperature: CGFloat?) {
+        guard let temperature = temperature else { return }
+        let value = CIVector(cgPoint: CGPoint(x: temperature, y: 0.0))
+        apply(.temperatureAndTint, withValue: value, forKey: "inputNeutral")
     }
 }

@@ -11,4 +11,5 @@ import Foundation
 struct CameraSettingsModel {
     var apeture = Apeture.all.first
     var shutterSpeed = ShutterSpeed.all.first
+    var whiteBalance = WhiteBalance.all.first
 }

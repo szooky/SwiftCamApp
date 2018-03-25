@@ -28,6 +28,8 @@ class CameraScreenView: UIView {
         backgroundImageView.motionBlur(withRadius: settings.shutterSpeed?.motionBlurRadius)
         backgroundImageView.gaussianBlur(withRadius: settings.apeture?.blurRadius)
 
+        foregroundImageView.whiteBalance(temperature: settings.whiteBalance?.temperature)
+        backgroundImageView.whiteBalance(temperature: settings.whiteBalance?.temperature)
     }
 
     func configureView() {

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol RotaryWheelDelegate: class {
-    func didChange(selectedIndex: Int)
+    func didChange(rotaryWheel: RotaryWheelControl, selectedIndex: Int)
 }
 
 class RotaryWheelControl: UIControl {
@@ -18,7 +18,7 @@ class RotaryWheelControl: UIControl {
 
     var currentIndex = 0 {
         didSet {
-            delegate?.didChange(selectedIndex: currentIndex)
+            delegate?.didChange(rotaryWheel: self, selectedIndex: currentIndex)
         }
     }
 
