@@ -12,7 +12,7 @@ protocol RotaryWheelDelegate: class {
     func didChange(selectedIndex: Int)
 }
 
-class RotaryWheelControl: UIView {
+class RotaryWheelControl: UIControl {
     weak var delegate: RotaryWheelDelegate?
     var components: [CameraParameterProtocol]
 
@@ -61,7 +61,7 @@ class RotaryWheelControl: UIView {
             button.transform = CGAffineTransform(rotationAngle: angle * CGFloat(component.offset))
             button.tag = component.offset
             button.addTarget(self, action: #selector(componentButtonClicked(_:)), for: .touchUpInside)
-            button.isUserInteractionEnabled = false
+            //button.isUserInteractionEnabled = false
 
             //button.cancelTracking(with: .)
 
@@ -112,46 +112,46 @@ class RotaryWheelControl: UIView {
         return atan2(dy,dx)
     }
 
-//    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
-//        let touchPoint = touch.location(in: self)
-//        deltaAngle = getDeltaAngle(for: touchPoint)
-//        transformationStart = transform
-//
-//        return true
-//    }
-//
-//    override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
-//        let angleDifference = deltaAngle - getDeltaAngle(for: touch.location(in: self))
-//        transform = transform.rotated(by: -angleDifference)
-//
-//        return true
-//    }
-//
-//    override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
-//        rotateToClosestComponent()
-//    }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        guard let touch = touches.first else { return }
+    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let touchPoint = touch.location(in: self)
         deltaAngle = getDeltaAngle(for: touchPoint)
         transformationStart = transform
+
+        return true
     }
 
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
-        guard let touch = touches.first else { return }
+    override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let angleDifference = deltaAngle - getDeltaAngle(for: touch.location(in: self))
         transform = transform.rotated(by: -angleDifference)
+
+        return true
     }
 
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
+    override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
         rotateToClosestComponent()
     }
 
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("now")
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        super.touchesBegan(touches, with: event)
+//        guard let touch = touches.first else { return }
+//        let touchPoint = touch.location(in: self)
+//        deltaAngle = getDeltaAngle(for: touchPoint)
+//        transformationStart = transform
+//    }
+//
+//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        super.touchesMoved(touches, with: event)
+//        guard let touch = touches.first else { return }
+//        let angleDifference = deltaAngle - getDeltaAngle(for: touch.location(in: self))
+//        transform = transform.rotated(by: -angleDifference)
+//    }
+//
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        super.touchesEnded(touches, with: event)
+//        rotateToClosestComponent()
+//    }
+//
+//    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        print("now")
+//    }
 }

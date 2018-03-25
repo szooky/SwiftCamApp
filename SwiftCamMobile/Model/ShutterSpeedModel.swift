@@ -9,23 +9,23 @@
 import UIKit
 
 struct ShutterSpeed: CameraParameterProtocol {
-    var exposure: CGFloat
     var description: String
+    var exposure: CGFloat
+    var motionBlurRadius: CGFloat
 
-    static let all = [ShutterSpeed(exposure: 0.5, description: "A"),
-                        ShutterSpeed(exposure: -6.0, description: "4000"),
-                        ShutterSpeed(exposure: -5.0, description: "2000"),
-                        ShutterSpeed(exposure: -4.0, description: "1000"),
-                        ShutterSpeed(exposure: -3.0, description: "500"),
-                        ShutterSpeed(exposure: -2.0, description: "250"),
-                        ShutterSpeed(exposure: -1.0, description: "180x"),
-                        ShutterSpeed(exposure: 0.0, description: "125"),
-                        ShutterSpeed(exposure: 1.0, description: "60"),
-                        ShutterSpeed(exposure: 2.0, description: "30"),
-                        ShutterSpeed(exposure: 3.0, description: "15"),
-                        ShutterSpeed(exposure: 4.0, description: "8"),
-                        ShutterSpeed(exposure: 5.0, description: "4"),
-                        ShutterSpeed(exposure: 6.0, description: "2"),
-                        ShutterSpeed(exposure: 7.0, description: "1"),
-                        ShutterSpeed(exposure: 10.0, description: "B")]
+    static let all = [ShutterSpeed(description: "A", exposure: 0.5, motionBlurRadius: 0.0),
+                      ShutterSpeed(description: "4000", exposure: -6.0, motionBlurRadius: 0.0),
+                      ShutterSpeed(description: "2000", exposure: -5.0, motionBlurRadius: 0.0),
+                      ShutterSpeed(description: "1000", exposure: -4.0, motionBlurRadius: 0.0),
+                      ShutterSpeed(description: "500", exposure: -3.0, motionBlurRadius: 0.0),
+                      ShutterSpeed(description: "250", exposure: -2.0, motionBlurRadius: 0.0),
+                      ShutterSpeed(description: "180x", exposure: -1.0, motionBlurRadius: 0.0),
+                      ShutterSpeed(description: "125", exposure: 0.0, motionBlurRadius: 0.0),
+                      ShutterSpeed(description: "60", exposure: 1.0, motionBlurRadius: 1.0),
+                      ShutterSpeed(description: "30", exposure: 2.0, motionBlurRadius: 20.0),
+                      ShutterSpeed(description: "15", exposure: 3.0, motionBlurRadius: 50.0),
+                      ShutterSpeed(description: "8", exposure: 4.0, motionBlurRadius: 80.0),
+                      ShutterSpeed(description: "4", exposure: 5.0, motionBlurRadius: 100.0),
+                      ShutterSpeed(description: "2", exposure: 6.0, motionBlurRadius: 200.0),
+                      ShutterSpeed(description: "1", exposure: 7.0, motionBlurRadius: 300.0)]
 }

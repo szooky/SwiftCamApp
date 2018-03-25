@@ -22,12 +22,12 @@ class CameraScreenView: UIView {
 
     func takePhoto(with settings: CameraSettingsModel) {
         setImages()
-//        foregroundImageView.exposure(withEV: settings.shutterSpeed?.exposure)
-//        backgroundImageView.exposure(withEV: settings.shutterSpeed?.exposure)
-//        backgroundImageView.gaussianBlur(withRadius: settings.apeture?.blurRadius)
+        foregroundImageView.exposure(withEV: settings.shutterSpeed?.exposure)
+        backgroundImageView.exposure(withEV: settings.shutterSpeed?.exposure)
+        foregroundImageView.motionBlur(withRadius: settings.shutterSpeed?.motionBlurRadius)
+        backgroundImageView.motionBlur(withRadius: settings.shutterSpeed?.motionBlurRadius)
+        backgroundImageView.gaussianBlur(withRadius: settings.apeture?.blurRadius)
 
-        foregroundImageView.isHidden = true
-        backgroundImageView.depthOfField()
     }
 
     func configureView() {
