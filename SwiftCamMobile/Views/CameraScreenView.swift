@@ -17,32 +17,41 @@ enum PictureType {
 class CameraScreenView: UIView {
     let foregroundImageView = UIImageView()
     let backgroundImageView = UIImageView()
-    let originalImage: UIImage = #imageLiteral(resourceName: "alfaGirl")
+    let originalBackgroundImage: UIImage = #imageLiteral(resourceName: "alfaGirl")
+    let originalForegroundImage: UIImage = #imageLiteral(resourceName: "alfaGirlForeground")
 
     func takePhoto(with settings: CameraSettingsModel) {
-        foregroundImageView.image = originalImage
-        foregroundImageView.exposure(withEV: settings.shutterSpeed?.exposure)
-        foregroundImageView.blur(withRadius: settings.apeture?.blurRadius)
+        setImages()
+//        foregroundImageView.exposure(withEV: settings.shutterSpeed?.exposure)
+//        backgroundImageView.exposure(withEV: settings.shutterSpeed?.exposure)
+//        backgroundImageView.gaussianBlur(withRadius: settings.apeture?.blurRadius)
+
+        foregroundImageView.isHidden = true
+        backgroundImageView.depthOfField()
     }
 
     func configureView() {
-        configureForegroundImageView()
+        configureImageViews()
     }
 
-    private func configureForegroundImageView() {
-        foregroundImageView.image = originalImage
-        foregroundImageView.contentMode = .scaleAspectFit
-        foregroundImageView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(foregroundImageView)
+    private func configureImageViews() {
+        for imageView in [backgroundImageView, foregroundImageView] {
+            imageView.contentMode = .scaleAspectFit
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            addSubview(imageView)
 
-        foregroundImageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        foregroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        foregroundImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        foregroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+            imageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+            imageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+            imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        }
+
+        setImages()
     }
 
-    private func configureBackgroundImageView() {
-        backgroundImageView.contentMode = .scaleAspectFit
+    private func setImages() {
+        foregroundImageView.image = originalForegroundImage
+        backgroundImageView.image = originalBackgroundImage
     }
 
 }
