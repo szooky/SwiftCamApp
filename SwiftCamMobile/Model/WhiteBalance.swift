@@ -16,5 +16,6 @@ struct WhiteBalance: CameraParameterProtocol {
                       WhiteBalance(temperature: 3000.0, description: "3000K"),
                       WhiteBalance(temperature: 6500.0, description: "6500K"),
                       WhiteBalance(temperature: 70000.0, description: "7000K"),
-                      WhiteBalance(temperature: 90000.0, description: "9000K")]
+                      WhiteBalance(temperature: 150000.0, description: "9000K")]
 }
+
