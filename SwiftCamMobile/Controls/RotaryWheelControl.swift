@@ -26,26 +26,35 @@ class RotaryWheelControl: UIView {
     var transformationStart: CGAffineTransform?
     var deltaAngle: CGFloat = 0.0
 
-    init(frame: CGRect, components: [CameraParameterProtocol]) {
+    init(components: [CameraParameterProtocol]) {
         self.components = components
 
-        super.init(frame: frame)
+        super.init(frame: .zero)
 
-        configureView()
-        configureComponents()
+//        configureView()
+//        configureComponents()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func configureView() {
+    func configureView() {
+        backgroundColor = UIColor.red
+
+        translatesAutoresizingMaskIntoConstraints = false
+
+
+        configureComponents()
         makeCircle()
-        backgroundColor = UIColor.black
+
 
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.panGestureHandler(panGesture:)))
         panGesture.minimumNumberOfTouches = 1
+        panGesture.maximumNumberOfTouches = 1
         addGestureRecognizer(panGesture)
+
+
     }
 
     private func configureComponents() {
@@ -56,24 +65,29 @@ class RotaryWheelControl: UIView {
             button.setTitle(component.element.description, for: .normal)
             button.contentHorizontalAlignment = .left
             button.backgroundColor = .blue
-            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
+            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10.0)
             button.titleLabel?.adjustsFontSizeToFitWidth = true
             button.titleEdgeInsets.left = 3.0
 
-            button.frame = CGRect(x: 5.0, y: frame.height / 2, width: frame.width / 2, height: 20.0)
-            button.layer.anchorPoint = CGPoint.init(x: 1.0, y: 0.5)
-            button.layer.position = CGPoint.init(x: bounds.width / 2, y: bounds.height / 2)
-            button.transform = CGAffineTransform(rotationAngle: angle * CGFloat(component.offset))
-            button.tag = component.offset
-            button.addTarget(self, action: #selector(componentButtonClicked(_:)), for: .touchUpInside)
-            //button.isUserInteractionEnabled = false
-
-            //button.cancelTracking(with: .)
 
             if component.element.description == "A" {
                 button.setTitleColor(.orange, for: .normal)
             }
             addSubview(button)
+
+            button.translatesAutoresizingMaskIntoConstraints = false
+
+            button.layer.anchorPoint = CGPoint.init(x: 1.0, y: 0.5)
+            button.transform = CGAffineTransform(rotationAngle: angle * CGFloat(component.offset))
+
+            button.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+            button.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5).isActive = true
+            button.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+            button.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+
+
+            button.tag = component.offset
+            button.addTarget(self, action: #selector(componentButtonClicked(_:)), for: .touchUpInside)
         }
 
         if components.count % 2 == 0 {
@@ -143,7 +157,7 @@ class RotaryWheelControl: UIView {
             self.transform = rotation
         })
 
-        //currentIndex = index
+        currentIndex = index
     }
 
     private func toClosest() {
@@ -183,6 +197,8 @@ class RotaryWheelControl: UIView {
     @objc func panGestureHandler(panGesture recognizer: UIPanGestureRecognizer) {
         guard recognizer.view != nil else { return }
         let touchPoint = recognizer.location(in: self)
+
+        print(#function)
 
         switch recognizer.state {
         case .began:

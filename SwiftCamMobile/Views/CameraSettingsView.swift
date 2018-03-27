@@ -9,7 +9,7 @@
 import UIKit
 
 private struct Constants {
-    static let font = UIFont.boldSystemFont(ofSize: 20.0)
+    static let font = UIFont(name: "Menlo-Bold", size: 20.0)!
 }
 
 class CameraSettingsView: UIView {
@@ -22,7 +22,7 @@ class CameraSettingsView: UIView {
 
     let shutterSpeedLabel: UILabel = {
         let label = UILabel()
-        label.text = "s.s.250"
+        label.text = "ss250"
         label.textColor = .white
         label.font = Constants.font
         label.textAlignment = .right
@@ -83,7 +83,7 @@ class CameraSettingsView: UIView {
     }
 
     func set(shutterSpeed: String) {
-        shutterSpeedLabel.text = "s.s." + shutterSpeed
+        shutterSpeedLabel.text = "ss" + shutterSpeed
     }
 
     func set(apeture: String) {

@@ -9,69 +9,66 @@
 import UIKit
 
 public class CameraViewController: UIViewController {
-    var settings = CameraSettingsModel() {
-        didSet {
-            //cameraSettingsView.update(with: settings)
-        }
-    }
-
     let externalDeviceView = ExternalDeviceView()
     let cameraView = CameraView()
 
-
-
+    var settings = CameraSettingsModel() {
+        didSet {
+            cameraView.cameraSettingsView.update(with: settings)
+        }
+    }
 
     override public func viewDidLoad() {
         view.backgroundColor = .white
 
-        addCameraView()
-        addExternalDeviceView()
+        configureCameraView()
+        configureExternalDeviceView()
+
+        cameraView.shutterSpeedDial.layoutSubviews()
+
     }
 
-    private func addExternalDeviceView() {
+    private func configureCameraView() {
+        view.addSubview(cameraView)
+
+        cameraView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100.0).isActive = true
+        cameraView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        cameraView.widthAnchor.constraint(equalToConstant: 600.0).isActive = true
+        cameraView.heightAnchor.constraint(equalToConstant: 600.0).isActive = true
+
+        cameraView.apetureRingView.lensRingDelegate = self
+        cameraView.shutterSpeedDial.delegate = self
+
+    }
+
+    private func configureExternalDeviceView() {
         view.addSubview(externalDeviceView)
         externalDeviceView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30.0).isActive = true
         externalDeviceView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         externalDeviceView.widthAnchor.constraint(equalToConstant: 400.0).isActive = true
         externalDeviceView.heightAnchor.constraint(equalToConstant: 300.0).isActive = true
     }
-
-    private func addCameraView() {
-        view.addSubview(cameraView)
-        cameraView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100.0).isActive = true
-        cameraView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        cameraView.widthAnchor.constraint(equalToConstant: 600.0).isActive = true
-        cameraView.heightAnchor.constraint(equalToConstant: 600.0).isActive = true
-    }
-
-
-
 }
 
 extension CameraViewController: RotaryWheelDelegate {
     func didChange(rotaryWheel: RotaryWheelControl, selectedIndex: Int) {
-//        switch rotaryWheel {
-//        case shutterSpeedDial:
-//            settings.shutterSpeed = ShutterSpeed.all[selectedIndex]
+        switch rotaryWheel {
+        case cameraView.shutterSpeedDial:
+            settings.shutterSpeed = ShutterSpeed.all[selectedIndex]
 //        case whiteBalanceDial:
 //            settings.whiteBalance = WhiteBalance.all[selectedIndex]
-//        default:
-//            return
-//
-//        }
+        default:
+            return
 
-        //cameraScreenView.takePhoto(with: settings)
-    }
+        }
 
-    func didChange(selectedIndex: Int) {
-        settings.shutterSpeed = ShutterSpeed.all[selectedIndex]
-        //cameraScreenView.takePhoto(with: settings)
+        externalDeviceView.displayView.cameraDidTakePhoto(with: settings)
     }
 }
 
 extension CameraViewController: LensRingDelegate {
     func didScrollTo(selectedIndex: Int) {
         settings.apeture = Apeture.all[selectedIndex]
-        //cameraScreenView.takePhoto(with: settings)
+        externalDeviceView.displayView.cameraDidTakePhoto(with: settings)
     }
 }

@@ -17,22 +17,24 @@ class CameraView: UIView {
     }()
 
     let cameraSettingsView = CameraSettingsView()
+    let shutterSpeedDial = RotaryWheelControl(components: ShutterSpeed.all)
 
 
 
     var apetureRingView: LensRingControl!
-    var shutterSpeedDial: RotaryWheelControl!
-    var whiteBalanceDial: RotaryWheelControl!
+  //  var whiteBalanceDial: RotaryWheelControl!
 
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
 
         configureCameraImageView()
-        addWhiteBalanceDial()
-        addShutterSpeedDial()
-        addApetureRing()
         addCameraSettingsScreen()
+        addShutterSpeedDial()
+
+
+        addWhiteBalanceDial()
+        addApetureRing()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -56,23 +58,25 @@ class CameraView: UIView {
         cameraSettingsView.heightAnchor.constraint(equalToConstant: 100.0).isActive = true
     }
 
+    private func addShutterSpeedDial() {
+        cameraImageView.addSubview(shutterSpeedDial)
+        shutterSpeedDial.translatesAutoresizingMaskIntoConstraints = false
+        shutterSpeedDial.trailingAnchor.constraint(equalTo: cameraImageView.trailingAnchor, constant: -100.0).isActive = true
+        shutterSpeedDial.bottomAnchor.constraint(equalTo: cameraImageView.bottomAnchor, constant: -120.0).isActive = true
+        shutterSpeedDial.widthAnchor.constraint(equalToConstant: 100.0).isActive = true
+        shutterSpeedDial.heightAnchor.constraint(equalToConstant: 100.0).isActive = true
+
+        shutterSpeedDial.configureView()
+    }
+
 
     private func addWhiteBalanceDial() {
-        let whiteBalanceDialFrame = CGRect(origin: CGPoint(x: 200.0, y: 10.0), size: CGSize(width: 200.0, height: 200.0))
 
 
-        whiteBalanceDial = RotaryWheelControl(frame: whiteBalanceDialFrame, components: WhiteBalance.all)
-        addSubview(whiteBalanceDial)
+        //whiteBalanceDial = RotaryWheelControl(frame: whiteBalanceDialFrame, components: WhiteBalance.all)
+      //  addSubview(whiteBalanceDial)
     }
 
-    private func addShutterSpeedDial() {
-        let shutterSpeedDialFrame = CGRect(origin: CGPoint(x: 20.0, y: 500.0), size: CGSize(width: 200.0, height: 200.0))
-
-
-        shutterSpeedDial = RotaryWheelControl(frame: shutterSpeedDialFrame, components: ShutterSpeed.all)
-        shutterSpeedDial.center = center
-        addSubview(shutterSpeedDial)
-    }
 
 
     private func addApetureRing() {
