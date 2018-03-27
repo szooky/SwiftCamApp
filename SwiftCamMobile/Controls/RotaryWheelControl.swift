@@ -143,7 +143,7 @@ class RotaryWheelControl: UIView {
             self.transform = rotation
         })
 
-        currentIndex = index
+        //currentIndex = index
     }
 
     private func toClosest() {

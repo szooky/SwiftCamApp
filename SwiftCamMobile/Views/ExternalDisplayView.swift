@@ -14,13 +14,23 @@ enum PictureType {
     case sport
 }
 
-class CameraScreenView: UIView {
+class ExternalDisplayView: UIView {
     let foregroundImageView = UIImageView()
     let backgroundImageView = UIImageView()
     let originalBackgroundImage: UIImage = #imageLiteral(resourceName: "alfaGirl")
     let originalForegroundImage: UIImage = #imageLiteral(resourceName: "alfaGirlForeground")
 
-    func takePhoto(with settings: CameraSettingsModel) {
+    init() {
+        super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
+        configureImageViews()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func cameraDidTakePhoto(with settings: CameraSettingsModel) {
         setImages()
         foregroundImageView.exposure(withEV: settings.shutterSpeed?.exposure)
         backgroundImageView.exposure(withEV: settings.shutterSpeed?.exposure)
@@ -30,10 +40,6 @@ class CameraScreenView: UIView {
 
         foregroundImageView.whiteBalance(temperature: settings.whiteBalance?.temperature)
         backgroundImageView.whiteBalance(temperature: settings.whiteBalance?.temperature)
-    }
-
-    func configureView() {
-        configureImageViews()
     }
 
     private func configureImageViews() {

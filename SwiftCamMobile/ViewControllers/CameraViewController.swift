@@ -15,25 +15,42 @@ public class CameraViewController: UIViewController {
         }
     }
 
+    let externalDeviceView = ExternalDeviceView()
+
     let cameraSettingsView = CameraSettingsView()
     var apetureRingView: LensRingControl!
     var shutterSpeedDial: RotaryWheelControl!
     var whiteBalanceDial: RotaryWheelControl!
-    let cameraScreenView = CameraScreenView()
-    let shutterButton = UIButton()
+
+    let cameraImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = #imageLiteral(resourceName: "camera")
+        return imageView
+    }()
 
     override public func viewDidLoad() {
-        if let view = self.view {
-            view.backgroundColor = UIColor.white
-            view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        }
+        view.backgroundColor = .white
 
         addShutterSpeedDial()
         addCameraSettingsScreen()
         addApetureRing()
-        addCameraScreen()
-        addShutterButton()
+
         addWhiteBalanceDial()
+
+        addExternalDevice()
+    }
+
+    private func addExternalDevice() {
+        view.addSubview(externalDeviceView)
+        externalDeviceView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30.0).isActive = true
+        externalDeviceView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        externalDeviceView.widthAnchor.constraint(equalToConstant: 400.0).isActive = true
+        externalDeviceView.heightAnchor.constraint(equalToConstant: 300.0).isActive = true
+    }
+
+    private func addIpadImageView() {
+
     }
 
     private func addWhiteBalanceDial() {
@@ -70,24 +87,6 @@ public class CameraViewController: UIViewController {
         apetureRingView.lensRingDelegate = self
     }
 
-    private func addCameraScreen() {
-        cameraScreenView.frame = CGRect(x: 20.0, y: 400.0, width: 400, height: 300.0)
-        view.addSubview(cameraScreenView)
-        cameraScreenView.configureView()
-    }
-
-    private func addShutterButton() {
-        shutterButton.setTitle("SHUTTER", for: .normal)
-        shutterButton.setTitleColor(.blue, for: .normal)
-        shutterButton.frame = CGRect(x: 20.0, y: 350.0, width: 100, height: 30)
-        shutterButton.addTarget(self, action: #selector(shutterButtonClicked(_:)), for: .touchUpInside)
-        view.addSubview(shutterButton)
-    }
-
-    @objc func shutterButtonClicked(_ button: UIButton) {
-        cameraScreenView.takePhoto(with: settings)
-    }
-
 }
 
 extension CameraViewController: RotaryWheelDelegate {
@@ -102,18 +101,18 @@ extension CameraViewController: RotaryWheelDelegate {
 
         }
 
-        cameraScreenView.takePhoto(with: settings)
+        //cameraScreenView.takePhoto(with: settings)
     }
 
     func didChange(selectedIndex: Int) {
         settings.shutterSpeed = ShutterSpeed.all[selectedIndex]
-        cameraScreenView.takePhoto(with: settings)
+        //cameraScreenView.takePhoto(with: settings)
     }
 }
 
 extension CameraViewController: LensRingDelegate {
     func didScrollTo(selectedIndex: Int) {
         settings.apeture = Apeture.all[selectedIndex]
-        cameraScreenView.takePhoto(with: settings)
+        //cameraScreenView.takePhoto(with: settings)
     }
 }
