@@ -15,6 +15,7 @@ protocol RotaryWheelDelegate: class {
 class RotaryWheelControl: UIView {
     weak var delegate: RotaryWheelDelegate?
     var components: [CameraParameterProtocol]
+    var slices = [RotaryWheelSlice]()
 
     var currentIndex = 0 {
         didSet {
@@ -74,36 +75,99 @@ class RotaryWheelControl: UIView {
             }
             addSubview(button)
         }
+
+        if components.count % 2 == 0 {
+            buildSlicesWithEvenCount()
+        } else {
+            buildSlicesWithOddCount()
+        }
     }
+
+    private func buildSlicesWithEvenCount() {
+        let sliceAngle = CGFloat.pi * 2 / CGFloat(components.count)
+        var middle: CGFloat = 0
+
+        for (index, component) in components.enumerated() {
+            var sliceMiddle = middle
+            var sliceMinimum = middle - (sliceAngle / 2)
+            let sliceMaximum = middle + (sliceAngle / 2)
+
+            if sliceMaximum - sliceAngle < -CGFloat.pi {
+                middle = CGFloat.pi
+                sliceMiddle = middle
+                sliceMinimum = CGFloat(fabsf(Float(sliceMaximum)))
+            }
+
+            middle -= sliceAngle
+            let slice = RotaryWheelSlice(minimum: sliceMinimum,
+                                         maximum: sliceMaximum,
+                                         middle: sliceMiddle,
+                                         component: component, index: index)
+
+            slices.append(slice)
+        }
+
+    }
+
+    private func buildSlicesWithOddCount() {
+        let sliceAngle = CGFloat.pi * 2 / CGFloat(components.count)
+        var middle: CGFloat = 0
+
+        for (index, component) in components.enumerated() {
+            let sliceMiddle = middle
+            let sliceMinimum = middle - (sliceAngle / 2)
+            let sliceMaximum = middle + (sliceAngle / 2)
+
+            middle -= sliceAngle
+
+            if middle < -CGFloat.pi {
+                middle = -middle
+                middle -= sliceAngle
+            }
+
+            let slice = RotaryWheelSlice(minimum: sliceMinimum,
+                                         maximum: sliceMaximum,
+                                         middle: sliceMiddle,
+                                         component: component, index: index)
+
+            slices.append(slice)
+        }
+    }
+
 
     func rotateToComponent(withIndex index: Int) {
         let angle = CGFloat.pi * 2 / CGFloat(components.count) * CGFloat(index)
         let rotation = CGAffineTransform.identity.rotated(by: -angle)
 
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             self.transform = rotation
         })
 
         currentIndex = index
     }
 
-    private func rotateToClosestComponent() {
-        let singleComponentAngle = CGFloat.pi * 2 / CGFloat(components.count)
-        let currentWheelRotation = atan2(transform.b, transform.a)
+    private func toClosest() {
+        let angle = atan2(transform.b, transform.a)
+        var newValue: CGFloat = 0.0
+        var newIndex = 0
 
-        guard currentWheelRotation != 0.0 else { return }
-        let delta = abs(singleComponentAngle) / abs(currentWheelRotation)
+        for slice in slices {
+            if slice.minimum > 0.0 && slice.maximum < 0.0 {
+                if slice.maximum > angle || slice.minimum < angle {
+                    if angle > 0 {
+                        newValue = angle - CGFloat.pi
+                    } else {
+                        newValue = CGFloat.pi + angle
+                    }
+                    newIndex = slice.index
+                }
+            } else if angle > slice.minimum && angle < slice.maximum {
+                newValue = angle - slice.middle
+                newIndex = slice.index
+            }
 
-        print(currentWheelRotation)
-        //let closestComponentIndex = Int(delta.rounded())
-
-
-        let x = singleComponentAngle / 2 + 2 * CGFloat.pi - currentWheelRotation
-        let closestComponentIndex = abs(Int(x / currentWheelRotation) % components.count)
-
-
-        print(closestComponentIndex)
-        rotateToComponent(withIndex: closestComponentIndex)
+            rotateToComponent(withIndex: newIndex)
+        }
     }
 
     @objc func componentButtonClicked(_ button: UIButton) {
@@ -128,9 +192,10 @@ class RotaryWheelControl: UIView {
             let angleDifference = deltaAngle - getDeltaAngle(for: touchPoint)
             transform = transform.rotated(by: -angleDifference)
         case .ended:
-            rotateToClosestComponent()
+            toClosest()
         default:
             return
         }
     }
 }
+
