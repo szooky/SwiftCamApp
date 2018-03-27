@@ -12,7 +12,7 @@ class CameraSettingsView: UIView {
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-
+        stackView.distribution = .fillEqually
         return stackView
     }()
 
@@ -31,6 +31,15 @@ class CameraSettingsView: UIView {
         label.font = UIFont.boldSystemFont(ofSize: 30.0)
         return label
     }()
+
+    let whiteBalanceLabel: UILabel = {
+        let label = UILabel()
+        label.text = "6500K"
+        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 30.0)
+        return label
+    }()
+
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,6 +60,7 @@ class CameraSettingsView: UIView {
         stackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         stackView.addArrangedSubview(shutterSpeedLabel)
         stackView.addArrangedSubview(apetureLabel)
+        stackView.addArrangedSubview(whiteBalanceLabel)
     }
 
     func set(shutterSpeed: String) {
@@ -61,9 +71,14 @@ class CameraSettingsView: UIView {
         apetureLabel.text = "f" + apeture
     }
 
+    func set(whiteBalance: String) {
+        whiteBalanceLabel.text = whiteBalance
+    }
+
     func update(with settings: CameraSettingsModel) {
         set(apeture: settings.apeture?.description ?? "n/a")
         set(shutterSpeed: settings.shutterSpeed?.description ?? "n/a")
+        set(whiteBalance: settings.whiteBalance?.description ?? "n/a")
     }
 
 }

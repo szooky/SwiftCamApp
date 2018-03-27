@@ -26,6 +26,7 @@
 		387B5DA92066D8560037D692 /* CameraSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DA82066D8560037D692 /* CameraSettingsModel.swift */; };
 		387B5DAC2066D97C0037D692 /* CameraParameterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DAB2066D97C0037D692 /* CameraParameterProtocol.swift */; };
 		387B5DB02066EEF40037D692 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DAF2066EEF40037D692 /* UIImage+Extensions.swift */; };
+		38AFC7AD206ABF1900A13F41 /* RotaryWheelSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFC7AC206ABF1900A13F41 /* RotaryWheelSlice.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		387B5DA82066D8560037D692 /* CameraSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSettingsModel.swift; sourceTree = "<group>"; };
 		387B5DAB2066D97C0037D692 /* CameraParameterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraParameterProtocol.swift; sourceTree = "<group>"; };
 		387B5DAF2066EEF40037D692 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		38AFC7AC206ABF1900A13F41 /* RotaryWheelSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotaryWheelSlice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				381105DC206118B100F2F3E2 /* RotaryWheelControl.swift */,
+				38AFC7AC206ABF1900A13F41 /* RotaryWheelSlice.swift */,
 				381105DE206118DD00F2F3E2 /* LensRingControl.swift */,
 			);
 			path = Controls;
@@ -349,6 +352,7 @@
 				38619A502067BEB900898239 /* CIContext+Singleton.swift in Sources */,
 				387B5DA92066D8560037D692 /* CameraSettingsModel.swift in Sources */,
 				381B6C8420617699009858DF /* MacbookView.swift in Sources */,
+				38AFC7AD206ABF1900A13F41 /* RotaryWheelSlice.swift in Sources */,
 				387B5DA52066D6E00037D692 /* ApetureModel.swift in Sources */,
 				387B5DAC2066D97C0037D692 /* CameraParameterProtocol.swift in Sources */,
 				381105DD206118B100F2F3E2 /* RotaryWheelControl.swift in Sources */,
