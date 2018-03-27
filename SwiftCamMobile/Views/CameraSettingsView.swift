@@ -8,6 +8,10 @@
 
 import UIKit
 
+private struct Constants {
+    static let font = UIFont.boldSystemFont(ofSize: 20.0)
+}
+
 class CameraSettingsView: UIView {
     let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -20,7 +24,9 @@ class CameraSettingsView: UIView {
         let label = UILabel()
         label.text = "s.s.250"
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 30.0)
+        label.font = Constants.font
+        label.textAlignment = .right
+
         return label
     }()
 
@@ -28,7 +34,9 @@ class CameraSettingsView: UIView {
         let label = UILabel()
         label.text = "f2.8"
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 30.0)
+        label.font = Constants.font
+        label.textAlignment = .right
+
         return label
     }()
 
@@ -36,13 +44,16 @@ class CameraSettingsView: UIView {
         let label = UILabel()
         label.text = "6500K"
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 30.0)
+        label.font = Constants.font
+        label.textAlignment = .right
         return label
     }()
 
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
+
         configureView()
         configureStackView()
     }
@@ -52,12 +63,20 @@ class CameraSettingsView: UIView {
     }
 
     private func configureView() {
-        backgroundColor = .black
+        backgroundColor = .darkGray
+        clipsToBounds = true
+        layer.cornerRadius = 30.0
     }
 
     private func configureStackView() {
         addSubview(stackView)
-        stackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10.0).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10.0).isActive = true
+        stackView.topAnchor.constraint(equalTo: topAnchor, constant: 10.0).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10.0).isActive = true
+
         stackView.addArrangedSubview(shutterSpeedLabel)
         stackView.addArrangedSubview(apetureLabel)
         stackView.addArrangedSubview(whiteBalanceLabel)

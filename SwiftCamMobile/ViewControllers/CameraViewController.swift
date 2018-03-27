@@ -11,37 +11,24 @@ import UIKit
 public class CameraViewController: UIViewController {
     var settings = CameraSettingsModel() {
         didSet {
-            cameraSettingsView.update(with: settings)
+            //cameraSettingsView.update(with: settings)
         }
     }
 
     let externalDeviceView = ExternalDeviceView()
+    let cameraView = CameraView()
 
-    let cameraSettingsView = CameraSettingsView()
-    var apetureRingView: LensRingControl!
-    var shutterSpeedDial: RotaryWheelControl!
-    var whiteBalanceDial: RotaryWheelControl!
 
-    let cameraImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = #imageLiteral(resourceName: "camera")
-        return imageView
-    }()
+
 
     override public func viewDidLoad() {
         view.backgroundColor = .white
 
-        addShutterSpeedDial()
-        addCameraSettingsScreen()
-        addApetureRing()
-
-        addWhiteBalanceDial()
-
-        addExternalDevice()
+        addCameraView()
+        addExternalDeviceView()
     }
 
-    private func addExternalDevice() {
+    private func addExternalDeviceView() {
         view.addSubview(externalDeviceView)
         externalDeviceView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30.0).isActive = true
         externalDeviceView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -49,57 +36,29 @@ public class CameraViewController: UIViewController {
         externalDeviceView.heightAnchor.constraint(equalToConstant: 300.0).isActive = true
     }
 
-    private func addIpadImageView() {
-
+    private func addCameraView() {
+        view.addSubview(cameraView)
+        cameraView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100.0).isActive = true
+        cameraView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        cameraView.widthAnchor.constraint(equalToConstant: 600.0).isActive = true
+        cameraView.heightAnchor.constraint(equalToConstant: 600.0).isActive = true
     }
 
-    private func addWhiteBalanceDial() {
-        let whiteBalanceDialFrame = CGRect(origin: CGPoint(x: 200.0, y: 10.0), size: CGSize(width: 200.0, height: 200.0))
 
-
-        whiteBalanceDial = RotaryWheelControl(frame: whiteBalanceDialFrame, components: WhiteBalance.all)
-        whiteBalanceDial.delegate = self
-        view.addSubview(whiteBalanceDial)
-    }
-
-    private func addShutterSpeedDial() {
-        let shutterSpeedDialFrame = CGRect(origin: CGPoint(x: 20.0, y: 500.0), size: CGSize(width: 200.0, height: 200.0))
-
-
-        shutterSpeedDial = RotaryWheelControl(frame: shutterSpeedDialFrame, components: ShutterSpeed.all)
-        shutterSpeedDial.center = view.center
-        shutterSpeedDial.delegate = self
-        view.addSubview(shutterSpeedDial)
-    }
-
-    private func addCameraSettingsScreen() {
-        cameraSettingsView.frame = CGRect(x: 10.0, y: 20.0, width: 200.0, height: 100.0)
-        view.addSubview(cameraSettingsView)
-    }
-
-    private func addApetureRing() {
-        let apetureRingViewFrame = CGRect(x: 20.0, y: 150.0, width: 300, height: 100.0)
-        apetureRingView = LensRingControl(components: Apeture.all, frame: apetureRingViewFrame)
-
-        view.addSubview(apetureRingView)
-
-        apetureRingView.configureView()
-        apetureRingView.lensRingDelegate = self
-    }
 
 }
 
 extension CameraViewController: RotaryWheelDelegate {
     func didChange(rotaryWheel: RotaryWheelControl, selectedIndex: Int) {
-        switch rotaryWheel {
-        case shutterSpeedDial:
-            settings.shutterSpeed = ShutterSpeed.all[selectedIndex]
-        case whiteBalanceDial:
-            settings.whiteBalance = WhiteBalance.all[selectedIndex]
-        default:
-            return
-
-        }
+//        switch rotaryWheel {
+//        case shutterSpeedDial:
+//            settings.shutterSpeed = ShutterSpeed.all[selectedIndex]
+//        case whiteBalanceDial:
+//            settings.whiteBalance = WhiteBalance.all[selectedIndex]
+//        default:
+//            return
+//
+//        }
 
         //cameraScreenView.takePhoto(with: settings)
     }
