@@ -25,6 +25,7 @@ public class CameraViewController: UIViewController {
         configureExternalDeviceView()
 
         cameraView.shutterSpeedDial.layoutSubviews()
+        cameraView.shutterSpeedDial.makeCircle()
 
     }
 
@@ -62,13 +63,13 @@ extension CameraViewController: RotaryWheelDelegate {
 
         }
 
-        externalDeviceView.displayView.cameraDidTakePhoto(with: settings)
+        //externalDeviceView.displayView.cameraDidTakePhoto(with: settings)
     }
 }
 
 extension CameraViewController: LensRingDelegate {
     func didScrollTo(selectedIndex: Int) {
         settings.apeture = Apeture.all[selectedIndex]
-        externalDeviceView.displayView.cameraDidTakePhoto(with: settings)
+        //externalDeviceView.displayView.cameraDidTakePhoto(with: settings)
     }
 }

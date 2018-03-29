@@ -28,33 +28,31 @@ class RotaryWheelControl: UIView {
 
     init(components: [CameraParameterProtocol]) {
         self.components = components
-
         super.init(frame: .zero)
-
-//        configureView()
-//        configureComponents()
+        translatesAutoresizingMaskIntoConstraints = false
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        makeCircle()
+    }
+
     func configureView() {
-        backgroundColor = UIColor.red
-
-        translatesAutoresizingMaskIntoConstraints = false
-
+        backgroundColor = UIColor.black
 
         configureComponents()
-        makeCircle()
+        configurePanGesture()
+    }
 
-
+    private func configurePanGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.panGestureHandler(panGesture:)))
         panGesture.minimumNumberOfTouches = 1
         panGesture.maximumNumberOfTouches = 1
         addGestureRecognizer(panGesture)
-
-
     }
 
     private func configureComponents() {
@@ -64,7 +62,7 @@ class RotaryWheelControl: UIView {
             let button = UIButton()
             button.setTitle(component.element.description, for: .normal)
             button.contentHorizontalAlignment = .left
-            button.backgroundColor = .blue
+            button.backgroundColor = .black
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10.0)
             button.titleLabel?.adjustsFontSizeToFitWidth = true
             button.titleEdgeInsets.left = 3.0
@@ -84,7 +82,6 @@ class RotaryWheelControl: UIView {
             button.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5).isActive = true
             button.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
             button.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-
 
             button.tag = component.offset
             button.addTarget(self, action: #selector(componentButtonClicked(_:)), for: .touchUpInside)

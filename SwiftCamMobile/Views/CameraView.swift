@@ -18,22 +18,17 @@ class CameraView: UIView {
 
     let cameraSettingsView = CameraSettingsView()
     let shutterSpeedDial = RotaryWheelControl(components: ShutterSpeed.all)
-
-
-
-    var apetureRingView: LensRingControl!
-  //  var whiteBalanceDial: RotaryWheelControl!
+    let whiteBalanceDial = RotaryWheelControl(components: WhiteBalance.all)
+    let apetureRingView = LensRingControl(components: Apeture.all)
 
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
-
+        isUserInteractionEnabled = true
         configureCameraImageView()
-        addCameraSettingsScreen()
-        addShutterSpeedDial()
-
-
-        addWhiteBalanceDial()
+        configureCameraSettingsScreen()
+        configureShutterSpeedDial()
+        configureWhiteBalanceDial()
         addApetureRing()
     }
 
@@ -44,50 +39,56 @@ class CameraView: UIView {
     private func configureCameraImageView() {
         addSubview(cameraImageView)
         cameraImageView.translatesAutoresizingMaskIntoConstraints = false
+        cameraImageView.isUserInteractionEnabled = true
         cameraImageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         cameraImageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         cameraImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         cameraImageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
 
-    private func addCameraSettingsScreen() {
+    private func configureCameraSettingsScreen() {
         cameraImageView.addSubview(cameraSettingsView)
+
         cameraSettingsView.leadingAnchor.constraint(equalTo: cameraImageView.leadingAnchor, constant: 30.0).isActive = true
         cameraSettingsView.bottomAnchor.constraint(equalTo: cameraImageView.bottomAnchor, constant: -120.0).isActive = true
         cameraSettingsView.widthAnchor.constraint(equalToConstant: 100.0).isActive = true
         cameraSettingsView.heightAnchor.constraint(equalToConstant: 100.0).isActive = true
     }
 
-    private func addShutterSpeedDial() {
+    private func configureShutterSpeedDial() {
         cameraImageView.addSubview(shutterSpeedDial)
+
         shutterSpeedDial.translatesAutoresizingMaskIntoConstraints = false
-        shutterSpeedDial.trailingAnchor.constraint(equalTo: cameraImageView.trailingAnchor, constant: -100.0).isActive = true
-        shutterSpeedDial.bottomAnchor.constraint(equalTo: cameraImageView.bottomAnchor, constant: -120.0).isActive = true
-        shutterSpeedDial.widthAnchor.constraint(equalToConstant: 100.0).isActive = true
-        shutterSpeedDial.heightAnchor.constraint(equalToConstant: 100.0).isActive = true
+        shutterSpeedDial.trailingAnchor.constraint(equalTo: cameraImageView.trailingAnchor, constant: -120.0).isActive = true
+        shutterSpeedDial.bottomAnchor.constraint(equalTo: cameraImageView.bottomAnchor, constant: -107.0).isActive = true
+        shutterSpeedDial.widthAnchor.constraint(equalToConstant: 120.0).isActive = true
+        shutterSpeedDial.heightAnchor.constraint(equalToConstant: 120.0).isActive = true
 
         shutterSpeedDial.configureView()
     }
 
 
-    private func addWhiteBalanceDial() {
+    private func configureWhiteBalanceDial() {
+        cameraImageView.addSubview(whiteBalanceDial)
 
+        whiteBalanceDial.translatesAutoresizingMaskIntoConstraints = false
+        whiteBalanceDial.trailingAnchor.constraint(equalTo: cameraImageView.trailingAnchor, constant: 0.0).isActive = true
+        whiteBalanceDial.bottomAnchor.constraint(equalTo: cameraImageView.bottomAnchor, constant: -103).isActive = true
+        whiteBalanceDial.widthAnchor.constraint(equalToConstant: 90.0).isActive = true
+        whiteBalanceDial.heightAnchor.constraint(equalToConstant: 90.0).isActive = true
 
-        //whiteBalanceDial = RotaryWheelControl(frame: whiteBalanceDialFrame, components: WhiteBalance.all)
-      //  addSubview(whiteBalanceDial)
+        whiteBalanceDial.configureView()
     }
 
-
-
     private func addApetureRing() {
-        let apetureRingViewFrame = CGRect(x: 20.0, y: 150.0, width: 300, height: 100.0)
-        apetureRingView = LensRingControl(components: Apeture.all, frame: apetureRingViewFrame)
-
-        addSubview(apetureRingView)
+        cameraImageView.addSubview(apetureRingView)
+        apetureRingView.translatesAutoresizingMaskIntoConstraints = false
+        apetureRingView.leadingAnchor.constraint(equalTo: cameraImageView.leadingAnchor, constant: 125.0).isActive = true
+        apetureRingView.topAnchor.constraint(equalTo: cameraImageView.topAnchor, constant: 250.0).isActive = true
+        apetureRingView.widthAnchor.constraint(equalToConstant: 280.0).isActive = true
+        apetureRingView.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
 
         apetureRingView.configureView()
     }
-
-
 }
 
