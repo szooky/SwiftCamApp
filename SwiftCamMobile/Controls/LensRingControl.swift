@@ -135,12 +135,10 @@ class LensRingControl: UIView {
             componentButtons.append(button)
         }
 
-        componentsStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-        componentsStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        //componentsStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        //componentsStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+
         componentsStackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-
-        //componentsStackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-
         componentsStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 0.25).isActive = true
     }
 
@@ -148,13 +146,17 @@ class LensRingControl: UIView {
         gripView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(gripView)
 
-        gripView.widthAnchor.constraint(equalTo: componentsStackView.widthAnchor).isActive = true
+        //gripView.widthAnchor.constraint(equalTo: componentsStackView.widthAnchor).isActive = true
         gripView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 0.75).isActive = true
+
+        gripView.widthAnchor.constraint(equalTo: componentsStackView.widthAnchor, multiplier: 2.0).isActive = true
 
         gripView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
         gripView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         gripView.topAnchor.constraint(equalTo: componentsStackView.bottomAnchor).isActive = true
         gripView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+
+        componentsStackView.centerXAnchor.constraint(equalTo: gripView.centerXAnchor).isActive = true
     }
 
     private func configureLeftGradientView() {
@@ -183,31 +185,64 @@ class LensRingControl: UIView {
 
     private func scroll(to button: UIButton?) {
         guard let button = button else { return }
-        let x = button.center.x - frame.width / 2
-        let point = CGPoint(x: x, y: scrollView.contentOffset.y)
-        scrollView.setContentOffset(point, animated: true)
-        currentIndex = button.tag
+//        let buttonCenterX = convert(button.center, to: scrollView).x
+//        let x = buttonCenterX - (frame.width / 2)
+//        let point = CGPoint(x: x, y: scrollView.contentOffset.y)
+//        scrollView.setContentOffset(point, animated: true)
+//        currentIndex = button.tag
+
+
+        let pointOnScrollView = convert(button.center, to: superview)
+        let pointToScroll = CGPoint(x: pointOnScrollView.x, y: scrollView.contentOffset.y)
+        scrollView.setContentOffset(pointToScroll, animated: true)
+
+
     }
 
     private func scrollToNearestButton() {
-        let middlePoint = (frame.origin.x + frame.width) / 2
+        let middlePoint =  center.x
         let middlePointWithOffset = scrollView.contentOffset.x + middlePoint
 
         var minimumDistance = CGFloat.greatestFiniteMagnitude
         var closestButton = componentButtons.first
         for button in componentButtons {
-            let distance = abs(middlePointWithOffset - button.frame.origin.x)
+            let distance = abs(middlePointWithOffset - button.center.x)
             if distance < minimumDistance {
                 minimumDistance = distance
                 closestButton = button
             }
+
+            print(" button: " + components[button.tag].description)
+            print(middlePointWithOffset)
+            print(distance)
+            print(minimumDistance)
+            print("----")
+
         }
+
         scroll(to: closestButton)
     }
+
 }
 
 extension LensRingControl: UIScrollViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        scrollToNearestButton()
+        if !decelerate {
+         //   scrollToNearestButton()
+        }
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+      //  scrollToNearestButton()
+
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(scrollView.contentOffset.x)
+
+        for view in componentsStackView.arrangedSubviews {
+            print(view.frame.origin.x)
+            print(self.convert(view.frame.origin, to: superview))
+        }
     }
 }
