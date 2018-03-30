@@ -53,20 +53,8 @@ class RotaryWheelControl: UIView {
 
         panGesture.minimumNumberOfTouches = 1
         panGesture.maximumNumberOfTouches = 1
-      //  addGestureRecognizer(panGesture)
-
-        let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(self.rotatePiece(_:)))
-        addGestureRecognizer(rotationGesture)
+        addGestureRecognizer(panGesture)
     }
-
-    @objc func rotatePiece(_ gestureRecognizer : UIRotationGestureRecognizer) {   // Move the anchor point of the view's layer to the center of the
-        // user's two fingers. This creates a more natural looking rotation.
-        guard gestureRecognizer.view != nil else { return }
-
-        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
-            gestureRecognizer.view?.transform = gestureRecognizer.view!.transform.rotated(by: gestureRecognizer.rotation)
-            gestureRecognizer.rotation = 0
-        }}
 
     private func configureComponents() {
         let angle = CGFloat.pi * 2 / CGFloat(components.count)

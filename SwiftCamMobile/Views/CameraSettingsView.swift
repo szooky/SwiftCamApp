@@ -13,6 +13,7 @@ private struct Constants {
 }
 
 class CameraSettingsView: UIView {
+
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical

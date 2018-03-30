@@ -8,13 +8,10 @@
 
 import UIKit
 
-enum PictureType {
-    case portrait
-    case nightLandscape
-    case sport
-}
+typealias FilterKeyValue = (ImageFilterType, Any?)
 
 class ExternalDisplayView: UIView {
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
     let foregroundImageView = UIImageView()
     let backgroundImageView = UIImageView()
     let originalBackgroundImage: UIImage = #imageLiteral(resourceName: "alfaGirl")
@@ -24,6 +21,7 @@ class ExternalDisplayView: UIView {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         configureImageViews()
+        configureActivityIndicatior()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -31,15 +29,48 @@ class ExternalDisplayView: UIView {
     }
 
     func cameraDidTakePhoto(with settings: CameraSettingsModel) {
-        setImages()
-        foregroundImageView.exposure(withEV: settings.shutterSpeed?.exposure)
-        backgroundImageView.exposure(withEV: settings.shutterSpeed?.exposure)
-        foregroundImageView.motionBlur(withRadius: settings.shutterSpeed?.motionBlurRadius)
-        backgroundImageView.motionBlur(withRadius: settings.shutterSpeed?.motionBlurRadius)
-        backgroundImageView.gaussianBlur(withRadius: settings.apeture?.blurRadius)
 
-        foregroundImageView.whiteBalance(temperature: settings.whiteBalance?.temperature)
-        backgroundImageView.whiteBalance(temperature: settings.whiteBalance?.temperature)
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        DispatchQueue.global(qos: .background).async { 
+            let wrapper = CoreImageWrapper()
+            let foregroundFilters = self.getForegroundFilters(with: settings)
+            let foregroundImageWithFilters = wrapper.apply(foregroundFilters, to: self.originalForegroundImage)
+
+            let backgroundFilters = self.getBackgroundFilters(with: settings)
+            let backgroundImageWithFilters = wrapper.apply(backgroundFilters, to: self.originalBackgroundImage)
+
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
+                self.foregroundImageView.image = foregroundImageWithFilters
+                self.backgroundImageView.image = backgroundImageWithFilters
+
+            }
+        }
+    }
+
+
+
+    private func getForegroundFilters(with settings: CameraSettingsModel) -> [FilterKeyValue] {
+        var filters = [FilterKeyValue]()
+
+        filters.append((.motionBlur, settings.shutterSpeed?.motionBlurRadius))
+        filters.append((.exposure, settings.shutterSpeed?.exposure))
+      //  filters.append((.temperatureAndTint, settings.whiteBalance?.temperature))
+
+        return filters
+    }
+
+    private func getBackgroundFilters(with settings: CameraSettingsModel) -> [FilterKeyValue] {
+        var filters = [FilterKeyValue]()
+
+        filters.append((.motionBlur, settings.shutterSpeed?.motionBlurRadius))
+        filters.append((.exposure, settings.shutterSpeed?.exposure))
+    //    filters.append((.temperatureAndTint, settings.whiteBalance?.temperature))
+        filters.append((.gaussianBlur, settings.apeture?.blurRadius))
+
+        return filters
     }
 
     private func configureImageViews() {
@@ -57,9 +88,16 @@ class ExternalDisplayView: UIView {
         setImages()
     }
 
+    private func configureActivityIndicatior() {
+        addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        activityIndicator.isHidden = true
+    }
+
     private func setImages() {
         foregroundImageView.image = originalForegroundImage
         backgroundImageView.image = originalBackgroundImage
     }
-
 }

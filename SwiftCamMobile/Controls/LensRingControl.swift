@@ -71,25 +71,21 @@ class LensRingControl: UIView {
     }
 
     func addGradient(){
-
         let gradient:CAGradientLayer = CAGradientLayer()
         gradient.frame.size = leftGradientView.frame.size
         gradient.colors = [UIColor.black.cgColor,UIColor.white.withAlphaComponent(0).cgColor]
         gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
         gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
         self.leftGradientView.layer.addSublayer(gradient)
-
     }
 
     func addGradient2(){
-
         let gradient:CAGradientLayer = CAGradientLayer()
         gradient.frame.size = rightGradientView.frame.size
         gradient.colors = [UIColor.white.withAlphaComponent(0).cgColor, UIColor.black.cgColor]
         gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
         gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
         self.rightGradientView.layer.addSublayer(gradient)
-
     }
 
 
@@ -135,9 +131,6 @@ class LensRingControl: UIView {
             componentButtons.append(button)
         }
 
-        //componentsStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-        //componentsStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
-
         componentsStackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         componentsStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 0.25).isActive = true
     }
@@ -146,9 +139,7 @@ class LensRingControl: UIView {
         gripView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(gripView)
 
-        //gripView.widthAnchor.constraint(equalTo: componentsStackView.widthAnchor).isActive = true
         gripView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 0.75).isActive = true
-
         gripView.widthAnchor.constraint(equalTo: componentsStackView.widthAnchor, multiplier: 2.0).isActive = true
 
         gripView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
@@ -188,6 +179,7 @@ class LensRingControl: UIView {
         let buttonCenterOnSuperview = convert(button.center, to: superview)
         let pointToScroll = CGPoint(x: buttonCenterOnSuperview.x, y: scrollView.contentOffset.y)
         scrollView.setContentOffset(pointToScroll, animated: true)
+        lensRingDelegate?.didScrollTo(selectedIndex: button.tag)
     }
 
     private func scrollToNearestButton() {

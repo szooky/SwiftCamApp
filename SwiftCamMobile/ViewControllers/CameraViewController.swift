@@ -39,6 +39,7 @@ public class CameraViewController: UIViewController {
 
         cameraView.apetureRingView.lensRingDelegate = self
         cameraView.shutterSpeedDial.delegate = self
+        cameraView.whiteBalanceDial.delegate = self
 
     }
 
@@ -49,6 +50,22 @@ public class CameraViewController: UIViewController {
         externalDeviceView.widthAnchor.constraint(equalToConstant: 400.0).isActive = true
         externalDeviceView.heightAnchor.constraint(equalToConstant: 300.0).isActive = true
     }
+
+    private func updatePhoto() {
+
+        self.externalDeviceView.displayView.cameraDidTakePhoto(with: self.settings)
+
+//        self.externalDeviceView.displayView.activityIndicator.isHidden = false
+//        self.externalDeviceView.displayView.activityIndicator.startAnimating()
+//
+//        DispatchQueue.global(qos: .background).async {
+//            DispatchQueue.main.async {
+//                self.externalDeviceView.displayView.activityIndicator.stopAnimating()
+//                self.externalDeviceView.displayView.activityIndicator.isHidden = true
+//
+//            }
+//        }
+    }
 }
 
 extension CameraViewController: RotaryWheelDelegate {
@@ -56,20 +73,19 @@ extension CameraViewController: RotaryWheelDelegate {
         switch rotaryWheel {
         case cameraView.shutterSpeedDial:
             settings.shutterSpeed = ShutterSpeed.all[selectedIndex]
-//        case whiteBalanceDial:
-//            settings.whiteBalance = WhiteBalance.all[selectedIndex]
+        case cameraView.whiteBalanceDial:
+            settings.whiteBalance = WhiteBalance.all[selectedIndex]
         default:
             return
-
         }
 
-        //externalDeviceView.displayView.cameraDidTakePhoto(with: settings)
+        updatePhoto()
     }
 }
 
 extension CameraViewController: LensRingDelegate {
     func didScrollTo(selectedIndex: Int) {
         settings.apeture = Apeture.all[selectedIndex]
-        //externalDeviceView.displayView.cameraDidTakePhoto(with: settings)
+        updatePhoto()
     }
 }
