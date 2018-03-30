@@ -185,39 +185,23 @@ class LensRingControl: UIView {
 
     private func scroll(to button: UIButton?) {
         guard let button = button else { return }
-//        let buttonCenterX = convert(button.center, to: scrollView).x
-//        let x = buttonCenterX - (frame.width / 2)
-//        let point = CGPoint(x: x, y: scrollView.contentOffset.y)
-//        scrollView.setContentOffset(point, animated: true)
-//        currentIndex = button.tag
-
-
-        let pointOnScrollView = convert(button.center, to: superview)
-        let pointToScroll = CGPoint(x: pointOnScrollView.x, y: scrollView.contentOffset.y)
+        let buttonCenterOnSuperview = convert(button.center, to: superview)
+        let pointToScroll = CGPoint(x: buttonCenterOnSuperview.x, y: scrollView.contentOffset.y)
         scrollView.setContentOffset(pointToScroll, animated: true)
-
-
     }
 
     private func scrollToNearestButton() {
-        let middlePoint =  center.x
-        let middlePointWithOffset = scrollView.contentOffset.x + middlePoint
-
         var minimumDistance = CGFloat.greatestFiniteMagnitude
         var closestButton = componentButtons.first
+
         for button in componentButtons {
-            let distance = abs(middlePointWithOffset - button.center.x)
+            let buttonCenterOnSuperview = convert(button.center, to: superview)
+            let distance = abs(scrollView.contentOffset.x - buttonCenterOnSuperview.x)
+
             if distance < minimumDistance {
                 minimumDistance = distance
                 closestButton = button
             }
-
-            print(" button: " + components[button.tag].description)
-            print(middlePointWithOffset)
-            print(distance)
-            print(minimumDistance)
-            print("----")
-
         }
 
         scroll(to: closestButton)
@@ -228,21 +212,11 @@ class LensRingControl: UIView {
 extension LensRingControl: UIScrollViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
-         //   scrollToNearestButton()
+           scrollToNearestButton()
         }
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-      //  scrollToNearestButton()
-
-    }
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.x)
-
-        for view in componentsStackView.arrangedSubviews {
-            print(view.frame.origin.x)
-            print(self.convert(view.frame.origin, to: superview))
-        }
+       scrollToNearestButton()
     }
 }
