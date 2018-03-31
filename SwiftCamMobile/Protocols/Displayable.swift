@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol CameraParameterProtocol {
+protocol Displayable {
     var description: String {get set}
 }

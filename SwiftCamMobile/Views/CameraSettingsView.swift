@@ -23,7 +23,6 @@ class CameraSettingsView: UIView {
 
     let shutterSpeedLabel: UILabel = {
         let label = UILabel()
-        label.text = "ss250"
         label.textColor = .white
         label.font = Constants.font
         label.textAlignment = .right
@@ -33,7 +32,6 @@ class CameraSettingsView: UIView {
 
     let apetureLabel: UILabel = {
         let label = UILabel()
-        label.text = "f2.8"
         label.textColor = .white
         label.font = Constants.font
         label.textAlignment = .right
@@ -43,7 +41,6 @@ class CameraSettingsView: UIView {
 
     let whiteBalanceLabel: UILabel = {
         let label = UILabel()
-        label.text = "6500K"
         label.textColor = .white
         label.font = Constants.font
         label.textAlignment = .right
@@ -95,7 +92,7 @@ class CameraSettingsView: UIView {
         whiteBalanceLabel.text = whiteBalance
     }
 
-    func update(with settings: CameraSettingsModel) {
+    func update(with settings: CameraSettings) {
         set(apeture: settings.apeture?.description)
         set(shutterSpeed: settings.shutterSpeed?.description)
         set(whiteBalance: settings.whiteBalance?.description)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Apeture: CameraParameterProtocol {
+struct Apeture: Displayable {
     var blurRadius: CGFloat
     var description: String
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct WhiteBalance: CameraParameterProtocol {
+struct WhiteBalance: Displayable {
     var temperature: CGFloat
     var description: String
 
@@ -18,4 +18,3 @@ struct WhiteBalance: CameraParameterProtocol {
                       WhiteBalance(temperature: 70000.0, description: "7000K"),
                       WhiteBalance(temperature: 150000.0, description: "9000K")]
 }
-

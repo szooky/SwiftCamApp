@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct ShutterSpeed: CameraParameterProtocol {
+struct ShutterSpeed: Displayable {
     var description: String
     var exposure: CGFloat
     var motionBlurRadius: CGFloat

@@ -31,7 +31,7 @@ enum ImageFilterType: String {
 
 
 class CoreImageWrapper {
-     func apply(_ filters: [(ImageFilterType, Any?)], to image: UIImage) -> UIImage? {
+     class func apply(_ filters: [(ImageFilterType, Any?)], to image: UIImage) -> UIImage? {
         var ciImage = CIImage(image: image)
         let ciContext = CIContextSingleton.sharedInstance.ciContext
         let boundingRect = CGRect(x: 0,
@@ -50,13 +50,4 @@ class CoreImageWrapper {
         guard let cgImage = ciContext.createCGImage(resultCiImage, from: boundingRect) else { return nil }
         return UIImage(cgImage: cgImage)
     }
-
-//    func motionBlur(with radius: CGFloat) -> ImageFilterType {
-//
-//    }
-//
-//    func whiteBalance(with temperature: CGFloat) -> ImageFilterType {
-//        let value = CIVector(cgPoint: CGPoint(x: temperature, y: 0.0))
-//        return (.temperatureAndTint, value)
-//    }
 }

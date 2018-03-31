@@ -23,11 +23,11 @@
 		3861ECFE206AE80400D0BD26 /* ExternalDeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3861ECFD206AE80400D0BD26 /* ExternalDeviceView.swift */; };
 		3861ED00206AE83100D0BD26 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3861ECFF206AE83100D0BD26 /* CameraView.swift */; };
 		387B5D9F2066C9730037D692 /* ExternalDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5D9E2066C9730037D692 /* ExternalDisplayView.swift */; };
-		387B5DA52066D6E00037D692 /* ApetureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DA42066D6E00037D692 /* ApetureModel.swift */; };
-		387B5DA72066D6E90037D692 /* ShutterSpeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DA62066D6E90037D692 /* ShutterSpeedModel.swift */; };
-		387B5DA92066D8560037D692 /* CameraSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DA82066D8560037D692 /* CameraSettingsModel.swift */; };
-		387B5DAC2066D97C0037D692 /* CameraParameterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DAB2066D97C0037D692 /* CameraParameterProtocol.swift */; };
-		387B5DB02066EEF40037D692 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DAF2066EEF40037D692 /* UIImage+Extensions.swift */; };
+		387B5DA52066D6E00037D692 /* Apeture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DA42066D6E00037D692 /* Apeture.swift */; };
+		387B5DA72066D6E90037D692 /* ShutterSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DA62066D6E90037D692 /* ShutterSpeed.swift */; };
+		387B5DA92066D8560037D692 /* CameraSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DA82066D8560037D692 /* CameraSettings.swift */; };
+		387B5DAC2066D97C0037D692 /* Displayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DAB2066D97C0037D692 /* Displayable.swift */; };
+		38A874432070187C00A7A012 /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A874422070187C00A7A012 /* Selectable.swift */; };
 		38AFC7AD206ABF1900A13F41 /* RotaryWheelSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFC7AC206ABF1900A13F41 /* RotaryWheelSlice.swift */; };
 		38FCA3E4206FF2D300C80304 /* Gradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FCA3E3206FF2D300C80304 /* Gradients.swift */; };
 /* End PBXBuildFile section */
@@ -72,11 +72,11 @@
 		3861ECFD206AE80400D0BD26 /* ExternalDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalDeviceView.swift; sourceTree = "<group>"; };
 		3861ECFF206AE83100D0BD26 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		387B5D9E2066C9730037D692 /* ExternalDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalDisplayView.swift; sourceTree = "<group>"; };
-		387B5DA42066D6E00037D692 /* ApetureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApetureModel.swift; sourceTree = "<group>"; };
-		387B5DA62066D6E90037D692 /* ShutterSpeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutterSpeedModel.swift; sourceTree = "<group>"; };
-		387B5DA82066D8560037D692 /* CameraSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSettingsModel.swift; sourceTree = "<group>"; };
-		387B5DAB2066D97C0037D692 /* CameraParameterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraParameterProtocol.swift; sourceTree = "<group>"; };
-		387B5DAF2066EEF40037D692 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		387B5DA42066D6E00037D692 /* Apeture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apeture.swift; sourceTree = "<group>"; };
+		387B5DA62066D6E90037D692 /* ShutterSpeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutterSpeed.swift; sourceTree = "<group>"; };
+		387B5DA82066D8560037D692 /* CameraSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSettings.swift; sourceTree = "<group>"; };
+		387B5DAB2066D97C0037D692 /* Displayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Displayable.swift; sourceTree = "<group>"; };
+		38A874422070187C00A7A012 /* Selectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
 		38AFC7AC206ABF1900A13F41 /* RotaryWheelSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotaryWheelSlice.swift; sourceTree = "<group>"; };
 		38FCA3E3206FF2D300C80304 /* Gradients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradients.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +129,7 @@
 		381105A6206117B000F2F3E2 /* SwiftCamMobile */ = {
 			isa = PBXGroup;
 			children = (
+				38CA2C93206FFF3800E4FDDF /* Enums */,
 				387B5DAA2066D8EC0037D692 /* Protocols */,
 				387B5DA32066D6D20037D692 /* Model */,
 				381B6C8020617659009858DF /* Views */,
@@ -174,7 +175,6 @@
 			children = (
 				381105D92061187B00F2F3E2 /* UIView+Extensions.swift */,
 				38FCA3E3206FF2D300C80304 /* Gradients.swift */,
-				387B5DAF2066EEF40037D692 /* UIImage+Extensions.swift */,
 				38619A4F2067BEB900898239 /* CIContext+Singleton.swift */,
 				384C56F8206ECA46006E3F29 /* CoreImageWrapper.swift */,
 			);
@@ -205,9 +205,9 @@
 		387B5DA32066D6D20037D692 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				387B5DA82066D8560037D692 /* CameraSettingsModel.swift */,
-				387B5DA42066D6E00037D692 /* ApetureModel.swift */,
-				387B5DA62066D6E90037D692 /* ShutterSpeedModel.swift */,
+				387B5DA82066D8560037D692 /* CameraSettings.swift */,
+				387B5DA42066D6E00037D692 /* Apeture.swift */,
+				387B5DA62066D6E90037D692 /* ShutterSpeed.swift */,
 				38619A8D206823B800898239 /* WhiteBalance.swift */,
 			);
 			path = Model;
@@ -216,9 +216,17 @@
 		387B5DAA2066D8EC0037D692 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				387B5DAB2066D97C0037D692 /* CameraParameterProtocol.swift */,
+				387B5DAB2066D97C0037D692 /* Displayable.swift */,
+				38A874422070187C00A7A012 /* Selectable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		38CA2C93206FFF3800E4FDDF /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -360,17 +368,17 @@
 				3861ED00206AE83100D0BD26 /* CameraView.swift in Sources */,
 				387B5D9F2066C9730037D692 /* ExternalDisplayView.swift in Sources */,
 				38619A502067BEB900898239 /* CIContext+Singleton.swift in Sources */,
-				387B5DA92066D8560037D692 /* CameraSettingsModel.swift in Sources */,
+				387B5DA92066D8560037D692 /* CameraSettings.swift in Sources */,
 				38AFC7AD206ABF1900A13F41 /* RotaryWheelSlice.swift in Sources */,
 				38FCA3E4206FF2D300C80304 /* Gradients.swift in Sources */,
-				387B5DA52066D6E00037D692 /* ApetureModel.swift in Sources */,
-				387B5DAC2066D97C0037D692 /* CameraParameterProtocol.swift in Sources */,
+				387B5DA52066D6E00037D692 /* Apeture.swift in Sources */,
+				387B5DAC2066D97C0037D692 /* Displayable.swift in Sources */,
+				38A874432070187C00A7A012 /* Selectable.swift in Sources */,
 				381105DD206118B100F2F3E2 /* RotaryWheelControl.swift in Sources */,
-				387B5DA72066D6E90037D692 /* ShutterSpeedModel.swift in Sources */,
+				387B5DA72066D6E90037D692 /* ShutterSpeed.swift in Sources */,
 				3861ECFE206AE80400D0BD26 /* ExternalDeviceView.swift in Sources */,
 				381105DF206118DD00F2F3E2 /* LensRingControl.swift in Sources */,
 				384C56F9206ECA46006E3F29 /* CoreImageWrapper.swift in Sources */,
-				387B5DB02066EEF40037D692 /* UIImage+Extensions.swift in Sources */,
 				381105DA2061187B00F2F3E2 /* UIView+Extensions.swift in Sources */,
 				381105D72061185F00F2F3E2 /* CameraViewController.swift in Sources */,
 			);

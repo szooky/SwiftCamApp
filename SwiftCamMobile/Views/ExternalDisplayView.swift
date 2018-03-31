@@ -32,12 +32,11 @@ class ExternalDisplayView: UIView {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         DispatchQueue.global(qos: .background).async { 
-            let wrapper = CoreImageWrapper()
             let foregroundFilters = self.getForegroundFilters(with: settings)
-            let foregroundImageWithFilters = wrapper.apply(foregroundFilters, to: self.originalForegroundImage)
+            let foregroundImageWithFilters = CoreImageWrapper.apply(foregroundFilters, to: self.originalForegroundImage)
 
             let backgroundFilters = self.getBackgroundFilters(with: settings)
-            let backgroundImageWithFilters = wrapper.apply(backgroundFilters, to: self.originalBackgroundImage)
+            let backgroundImageWithFilters = CoreImageWrapper.apply(backgroundFilters, to: self.originalBackgroundImage)
 
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()

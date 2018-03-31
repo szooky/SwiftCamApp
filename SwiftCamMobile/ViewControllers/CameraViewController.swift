@@ -25,7 +25,7 @@ public class CameraViewController: UIViewController {
         configureExternalDeviceView()
 
         cameraView.shutterSpeedDial.layoutSubviews()
-        cameraView.shutterSpeedDial.makeCircle()
+        cameraView.shutterSpeedDial.round()
     }
 
     private func configureCameraView() {
