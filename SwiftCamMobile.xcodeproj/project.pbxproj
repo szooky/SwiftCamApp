@@ -29,6 +29,7 @@
 		387B5DAC2066D97C0037D692 /* CameraParameterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DAB2066D97C0037D692 /* CameraParameterProtocol.swift */; };
 		387B5DB02066EEF40037D692 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DAF2066EEF40037D692 /* UIImage+Extensions.swift */; };
 		38AFC7AD206ABF1900A13F41 /* RotaryWheelSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFC7AC206ABF1900A13F41 /* RotaryWheelSlice.swift */; };
+		38FCA3E4206FF2D300C80304 /* Gradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FCA3E3206FF2D300C80304 /* Gradients.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		387B5DAB2066D97C0037D692 /* CameraParameterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraParameterProtocol.swift; sourceTree = "<group>"; };
 		387B5DAF2066EEF40037D692 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		38AFC7AC206ABF1900A13F41 /* RotaryWheelSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotaryWheelSlice.swift; sourceTree = "<group>"; };
+		38FCA3E3206FF2D300C80304 /* Gradients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradients.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				381105D92061187B00F2F3E2 /* UIView+Extensions.swift */,
+				38FCA3E3206FF2D300C80304 /* Gradients.swift */,
 				387B5DAF2066EEF40037D692 /* UIImage+Extensions.swift */,
 				38619A4F2067BEB900898239 /* CIContext+Singleton.swift */,
 				384C56F8206ECA46006E3F29 /* CoreImageWrapper.swift */,
@@ -359,6 +362,7 @@
 				38619A502067BEB900898239 /* CIContext+Singleton.swift in Sources */,
 				387B5DA92066D8560037D692 /* CameraSettingsModel.swift in Sources */,
 				38AFC7AD206ABF1900A13F41 /* RotaryWheelSlice.swift in Sources */,
+				38FCA3E4206FF2D300C80304 /* Gradients.swift in Sources */,
 				387B5DA52066D6E00037D692 /* ApetureModel.swift in Sources */,
 				387B5DAC2066D97C0037D692 /* CameraParameterProtocol.swift in Sources */,
 				381105DD206118B100F2F3E2 /* RotaryWheelControl.swift in Sources */,

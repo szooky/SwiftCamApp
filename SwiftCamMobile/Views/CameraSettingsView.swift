@@ -9,7 +9,7 @@
 import UIKit
 
 private struct Constants {
-    static let font = UIFont(name: "Menlo-Bold", size: 20.0)!
+    static let font = UIFont(name: "Menlo-Bold", size: 20.0) ?? UIFont.systemFont(ofSize: 20.0)
 }
 
 class CameraSettingsView: UIView {
@@ -83,22 +83,22 @@ class CameraSettingsView: UIView {
         stackView.addArrangedSubview(whiteBalanceLabel)
     }
 
-    func set(shutterSpeed: String) {
-        shutterSpeedLabel.text = "ss" + shutterSpeed
+    func set(shutterSpeed: String?) {
+        shutterSpeedLabel.text = "ss\(shutterSpeed ?? "")"
     }
 
-    func set(apeture: String) {
-        apetureLabel.text = "f" + apeture
+    func set(apeture: String?) {
+        apetureLabel.text = "f\(apeture ?? "")"
     }
 
-    func set(whiteBalance: String) {
+    func set(whiteBalance: String?) {
         whiteBalanceLabel.text = whiteBalance
     }
 
     func update(with settings: CameraSettingsModel) {
-        set(apeture: settings.apeture?.description ?? "n/a")
-        set(shutterSpeed: settings.shutterSpeed?.description ?? "n/a")
-        set(whiteBalance: settings.whiteBalance?.description ?? "n/a")
+        set(apeture: settings.apeture?.description)
+        set(shutterSpeed: settings.shutterSpeed?.description)
+        set(whiteBalance: settings.whiteBalance?.description)
     }
 
 }

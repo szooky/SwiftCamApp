@@ -16,15 +16,13 @@ class RotaryWheelControl: UIView {
     weak var delegate: RotaryWheelDelegate?
     var components: [CameraParameterProtocol]
     var slices = [RotaryWheelSlice]()
-
+    var transformationStart: CGAffineTransform?
+    var deltaAngle: CGFloat = 0.0
     var currentIndex = 0 {
         didSet {
             delegate?.didChange(rotaryWheel: self, selectedIndex: currentIndex)
         }
     }
-
-    var transformationStart: CGAffineTransform?
-    var deltaAngle: CGFloat = 0.0
 
     init(components: [CameraParameterProtocol]) {
         self.components = components
@@ -50,7 +48,6 @@ class RotaryWheelControl: UIView {
 
     private func configurePanGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.panGestureHandler(panGesture:)))
-
         panGesture.minimumNumberOfTouches = 1
         panGesture.maximumNumberOfTouches = 1
         addGestureRecognizer(panGesture)
@@ -178,8 +175,9 @@ class RotaryWheelControl: UIView {
                 newIndex = slice.index
             }
 
-            rotateToComponent(withIndex: newIndex)
         }
+        rotateToComponent(withIndex: newIndex)
+
     }
 
     @objc func componentButtonClicked(_ button: UIButton) {
@@ -195,8 +193,6 @@ class RotaryWheelControl: UIView {
     @objc func panGestureHandler(panGesture recognizer: UIPanGestureRecognizer) {
         guard recognizer.view != nil else { return }
         let touchPoint = recognizer.location(in: self)
-
-        print(#function)
 
         switch recognizer.state {
         case .began:

@@ -26,7 +26,6 @@ public class CameraViewController: UIViewController {
 
         cameraView.shutterSpeedDial.layoutSubviews()
         cameraView.shutterSpeedDial.makeCircle()
-
     }
 
     private func configureCameraView() {
@@ -52,19 +51,8 @@ public class CameraViewController: UIViewController {
     }
 
     private func updatePhoto() {
-
-        self.externalDeviceView.displayView.cameraDidTakePhoto(with: self.settings)
-
-//        self.externalDeviceView.displayView.activityIndicator.isHidden = false
-//        self.externalDeviceView.displayView.activityIndicator.startAnimating()
-//
-//        DispatchQueue.global(qos: .background).async {
-//            DispatchQueue.main.async {
-//                self.externalDeviceView.displayView.activityIndicator.stopAnimating()
-//                self.externalDeviceView.displayView.activityIndicator.isHidden = true
-//
-//            }
-//        }
+        externalDeviceView.displayView.cameraDidTakePhoto(with: self.settings)
+        print(#function)
     }
 }
 

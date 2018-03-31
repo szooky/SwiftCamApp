@@ -29,7 +29,6 @@ class ExternalDisplayView: UIView {
     }
 
     func cameraDidTakePhoto(with settings: CameraSettingsModel) {
-
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         DispatchQueue.global(qos: .background).async { 
@@ -49,8 +48,6 @@ class ExternalDisplayView: UIView {
             }
         }
     }
-
-
 
     private func getForegroundFilters(with settings: CameraSettingsModel) -> [FilterKeyValue] {
         var filters = [FilterKeyValue]()
@@ -85,7 +82,8 @@ class ExternalDisplayView: UIView {
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         }
 
-        setImages()
+        foregroundImageView.image = originalForegroundImage
+        backgroundImageView.image = originalBackgroundImage
     }
 
     private func configureActivityIndicatior() {
@@ -94,10 +92,5 @@ class ExternalDisplayView: UIView {
         activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         activityIndicator.isHidden = true
-    }
-
-    private func setImages() {
-        foregroundImageView.image = originalForegroundImage
-        backgroundImageView.image = originalBackgroundImage
     }
 }

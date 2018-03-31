@@ -66,28 +66,9 @@ class LensRingControl: UIView {
         layer.cornerRadius = 5.0
         clipsToBounds = true
 
-        addGradient()
-        addGradient2()
+        leftGradientView.addGradient(direction: .leftToRight, colors: .blackToOpaque)
+        rightGradientView.addGradient(direction: .rightToLeft, colors: .blackToOpaque)
     }
-
-    func addGradient(){
-        let gradient:CAGradientLayer = CAGradientLayer()
-        gradient.frame.size = leftGradientView.frame.size
-        gradient.colors = [UIColor.black.cgColor,UIColor.white.withAlphaComponent(0).cgColor]
-        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
-        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
-        self.leftGradientView.layer.addSublayer(gradient)
-    }
-
-    func addGradient2(){
-        let gradient:CAGradientLayer = CAGradientLayer()
-        gradient.frame.size = rightGradientView.frame.size
-        gradient.colors = [UIColor.white.withAlphaComponent(0).cgColor, UIColor.black.cgColor]
-        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
-        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
-        self.rightGradientView.layer.addSublayer(gradient)
-    }
-
 
     func configureView() {
         translatesAutoresizingMaskIntoConstraints = false
