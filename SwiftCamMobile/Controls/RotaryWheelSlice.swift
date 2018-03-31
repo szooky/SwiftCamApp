@@ -12,6 +12,6 @@ struct RotaryWheelSlice {
     var minimum: CGFloat
     var maximum: CGFloat
     var middle: CGFloat
-    var component: CameraParameterProtocol
+    var component: Displayable
     var index: Int
 }

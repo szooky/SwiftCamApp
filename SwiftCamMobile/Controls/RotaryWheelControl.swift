@@ -14,7 +14,7 @@ protocol RotaryWheelDelegate: class {
 
 class RotaryWheelControl: UIView {
     weak var delegate: RotaryWheelDelegate?
-    var components: [CameraParameterProtocol]
+    var components: [Displayable]
     var slices = [RotaryWheelSlice]()
     var deltaAngle: CGFloat = 0.0
     var currentIndex = 0 {
@@ -23,7 +23,7 @@ class RotaryWheelControl: UIView {
         }
     }
 
-    init(components: [CameraParameterProtocol]) {
+    init(components: [Displayable]) {
         self.components = components
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false

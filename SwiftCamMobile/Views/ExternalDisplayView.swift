@@ -28,7 +28,7 @@ class ExternalDisplayView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func cameraDidTakePhoto(with settings: CameraSettingsModel) {
+    func cameraDidTakePhoto(with settings: CameraSettings) {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         DispatchQueue.global(qos: .background).async { 
@@ -48,7 +48,7 @@ class ExternalDisplayView: UIView {
         }
     }
 
-    private func getForegroundFilters(with settings: CameraSettingsModel) -> [FilterKeyValue] {
+    private func getForegroundFilters(with settings: CameraSettings) -> [FilterKeyValue] {
         var filters = [FilterKeyValue]()
 
         filters.append((.motionBlur, settings.shutterSpeed?.motionBlurRadius))
@@ -58,7 +58,7 @@ class ExternalDisplayView: UIView {
         return filters
     }
 
-    private func getBackgroundFilters(with settings: CameraSettingsModel) -> [FilterKeyValue] {
+    private func getBackgroundFilters(with settings: CameraSettings) -> [FilterKeyValue] {
         var filters = [FilterKeyValue]()
 
         filters.append((.motionBlur, settings.shutterSpeed?.motionBlurRadius))

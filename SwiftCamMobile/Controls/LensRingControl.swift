@@ -14,7 +14,7 @@ protocol LensRingDelegate: class {
 
 class LensRingControl: UIView {
     weak var lensRingDelegate: LensRingDelegate?
-    let components: [CameraParameterProtocol]
+    let components: [Displayable]
     var componentButtons = [UIButton]()
     var currentIndex = 0 {
         didSet {
@@ -52,7 +52,7 @@ class LensRingControl: UIView {
         return view
     }()
 
-    init(components: [CameraParameterProtocol]) {
+    init(components: [Displayable]) {
         self.components = components
         super.init(frame: .zero)
     }

@@ -12,7 +12,7 @@ public class CameraViewController: UIViewController {
     let externalDeviceView = ExternalDeviceView()
     let cameraView = CameraView()
 
-    var settings = CameraSettingsModel() {
+    var settings = CameraSettings() {
         didSet {
             cameraView.cameraSettingsView.update(with: settings)
         }
