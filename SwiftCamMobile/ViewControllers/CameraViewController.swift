@@ -21,8 +21,11 @@ public class CameraViewController: UIViewController {
     override public func viewDidLoad() {
         view.backgroundColor = .white
 
-        configureCameraView()
         configurePhotoDisplayView()
+        configureCameraView()
+
+        cameraView.cameraSettingsView.update(with: settings)
+        photoDisplayView.cameraDidTakePhoto(with: settings)
     }
 
     private func configureCameraView() {
@@ -40,8 +43,8 @@ public class CameraViewController: UIViewController {
 
     private func configurePhotoDisplayView() {
         view.addSubview(photoDisplayView)
-        photoDisplayView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30.0).isActive = true
-        photoDisplayView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        photoDisplayView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -120.0).isActive = true
+        photoDisplayView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -50.0).isActive = true
         photoDisplayView.widthAnchor.constraint(equalToConstant: 400.0).isActive = true
         photoDisplayView.heightAnchor.constraint(equalToConstant: 300.0).isActive = true
     }

@@ -73,6 +73,7 @@ class LensRing: UIView, Selectable {
         configureRightGradientView()
 
         scrollView.bringSubview(toFront: componentsStackView)
+        scroll(to: componentButtons.first)
     }
 
     private func configureScrollView() {

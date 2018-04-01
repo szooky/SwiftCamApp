@@ -15,7 +15,7 @@ class PhotoDisplayView: UIView {
     let originalBackgroundImage: UIImage = #imageLiteral(resourceName: "portraitBackground")
     let originalForegroundImage: UIImage = #imageLiteral(resourceName: "portraitForeground")
 
-    let deviceImageView: UIImageView = {
+    let frameImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.image = #imageLiteral(resourceName: "ipad")
@@ -25,10 +25,9 @@ class PhotoDisplayView: UIView {
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundImageView.image = #imageLiteral(resourceName: "ipad")
-        backgroundImageView.contentMode = .scaleAspectFit
 
-        configureImageViews()
+        configureFrameImageView()
+        configurePhotoImageViews()
         configureActivityIndicatior()
     }
 
@@ -36,7 +35,12 @@ class PhotoDisplayView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func configureImageViews() {
+    private func configureFrameImageView() {
+        addSubview(frameImageView)
+        frameImageView.edges(equalTo: self)
+    }
+
+    private func configurePhotoImageViews() {
         for imageView in [backgroundImageView, foregroundImageView] {
             addSubview(imageView)
             imageView.contentMode = .scaleAspectFit
