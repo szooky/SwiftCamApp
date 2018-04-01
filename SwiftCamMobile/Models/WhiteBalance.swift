@@ -12,6 +12,10 @@ struct WhiteBalance: Displayable {
     var temperature: CGFloat
     var description: String
 
+    var temperatureVector: CIVector {
+        return CIVector(cgPoint: CGPoint(x: temperature, y: 0))
+    }
+
     static let all = [WhiteBalance(temperature: 2000.0, description: "2000K"),
                       WhiteBalance(temperature: 3000.0, description: "3000K"),
                       WhiteBalance(temperature: 6500.0, description: "6500K"),

@@ -9,5 +9,11 @@
 import Foundation
 
 protocol Selectable: class {
-    func didSelect(index: Int, in control: Any?)
+    var currentIndex: Int { get set }
+    var components: [Displayable] { get set }
+    var delegate: SelectableControlDelegate? { get set }
+}
+
+protocol SelectableControlDelegate: class {
+    func didSelect(index: Int, in control: Selectable?)
 }

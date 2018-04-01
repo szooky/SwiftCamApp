@@ -8,18 +8,14 @@
 
 import UIKit
 
-protocol RotaryWheelDelegate: class {
-    func didChange(rotaryWheel: RotaryWheelControl, selectedIndex: Int)
-}
-
-class RotaryWheelControl: UIView {
-    weak var delegate: RotaryWheelDelegate?
+class RotaryDial: UIView, Selectable {
+    weak var delegate: SelectableControlDelegate?
     var components: [Displayable]
     var slices = [RotaryWheelSlice]()
     var deltaAngle: CGFloat = 0.0
     var currentIndex = 0 {
         didSet {
-            delegate?.didChange(rotaryWheel: self, selectedIndex: currentIndex)
+            delegate?.didSelect(index: currentIndex, in: self)
         }
     }
 
@@ -64,12 +60,11 @@ class RotaryWheelControl: UIView {
             button.titleLabel?.adjustsFontSizeToFitWidth = true
             button.titleEdgeInsets.left = 3.0
 
-
             if component.element.description == "A" {
                 button.setTitleColor(.orange, for: .normal)
             }
-            addSubview(button)
 
+            addSubview(button)
             button.translatesAutoresizingMaskIntoConstraints = false
 
             button.layer.anchorPoint = CGPoint.init(x: 1.0, y: 0.5)

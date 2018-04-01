@@ -9,35 +9,25 @@
 import UIKit
 import CoreImage
 
-enum ImageFilterType: String {
-    case exposure = "CIExposureAdjust"
-    case gaussianBlur = "CIGaussianBlur"
-    case motionBlur = "CIMotionBlur"
-    case temperatureAndTint = "CITemperatureAndTint"
-
-    var valueKey: String {
-        switch self {
-        case .exposure:
-            return kCIInputEVKey
-        case .gaussianBlur:
-            return kCIInputRadiusKey
-        case .motionBlur:
-            return kCIInputRadiusKey
-        case .temperatureAndTint:
-            return "inputNeutral"
-        }
-    }
-}
-
-
 class CoreImageWrapper {
-     class func apply(_ filters: [(ImageFilterType, Any?)], to image: UIImage) -> UIImage? {
+    class func apply(_ settings: CameraSettings, to image: UIImage, isBackground: Bool) -> UIImage? {
+        var filters = [ImageFilterKeyValue]()
+
+        filters.append((.motionBlur, settings.shutterSpeed?.motionBlurRadius))
+        filters.append((.exposure, settings.shutterSpeed?.exposure))
+        filters.append((.temperatureAndTint, settings.whiteBalance?.temperatureVector))
+
+        if isBackground {
+            filters.append((.gaussianBlur, settings.apeture?.blurRadius))
+        }
+
+        return apply(filters, to: image)
+    }
+
+     private class func apply(_ filters: [(ImageFilter, Any?)], to image: UIImage) -> UIImage? {
         var ciImage = CIImage(image: image)
-        let ciContext = CIContextSingleton.sharedInstance.ciContext
-        let boundingRect = CGRect(x: 0,
-                                  y: 0,
-                                  width: image.size.width,
-                                  height: image.size.height)
+        let ciContext = SharedCIContext.sharedInstance.ciContext
+        let boundingRect = CGRect(origin: .zero, size: image.size)
 
         for (filterType, filterValue) in filters {
             guard let filter = CIFilter(name: filterType.rawValue) else { return nil }
@@ -48,6 +38,7 @@ class CoreImageWrapper {
 
         guard let resultCiImage = ciImage else { return nil }
         guard let cgImage = ciContext.createCGImage(resultCiImage, from: boundingRect) else { return nil }
+
         return UIImage(cgImage: cgImage)
     }
 }

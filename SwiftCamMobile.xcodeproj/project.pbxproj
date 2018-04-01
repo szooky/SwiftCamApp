@@ -14,22 +14,24 @@
 		381105C8206117B000F2F3E2 /* SwiftCamMobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381105C7206117B000F2F3E2 /* SwiftCamMobileUITests.swift */; };
 		381105D72061185F00F2F3E2 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381105D62061185F00F2F3E2 /* CameraViewController.swift */; };
 		381105DA2061187B00F2F3E2 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381105D92061187B00F2F3E2 /* UIView+Extensions.swift */; };
-		381105DD206118B100F2F3E2 /* RotaryWheelControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381105DC206118B100F2F3E2 /* RotaryWheelControl.swift */; };
-		381105DF206118DD00F2F3E2 /* LensRingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381105DE206118DD00F2F3E2 /* LensRingControl.swift */; };
-		381B6C8220617680009858DF /* CameraSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381B6C8120617680009858DF /* CameraSettingsView.swift */; };
+		381105DD206118B100F2F3E2 /* RotaryDial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381105DC206118B100F2F3E2 /* RotaryDial.swift */; };
+		381105DF206118DD00F2F3E2 /* LensRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381105DE206118DD00F2F3E2 /* LensRing.swift */; };
+		381B6C8220617680009858DF /* SettingsDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381B6C8120617680009858DF /* SettingsDisplayView.swift */; };
 		384C56F9206ECA46006E3F29 /* CoreImageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384C56F8206ECA46006E3F29 /* CoreImageWrapper.swift */; };
-		38619A502067BEB900898239 /* CIContext+Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38619A4F2067BEB900898239 /* CIContext+Singleton.swift */; };
+		38619A502067BEB900898239 /* SharedCIContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38619A4F2067BEB900898239 /* SharedCIContext.swift */; };
 		38619A8E206823B800898239 /* WhiteBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38619A8D206823B800898239 /* WhiteBalance.swift */; };
-		3861ECFE206AE80400D0BD26 /* ExternalDeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3861ECFD206AE80400D0BD26 /* ExternalDeviceView.swift */; };
 		3861ED00206AE83100D0BD26 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3861ECFF206AE83100D0BD26 /* CameraView.swift */; };
-		387B5D9F2066C9730037D692 /* ExternalDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5D9E2066C9730037D692 /* ExternalDisplayView.swift */; };
+		387B5D9F2066C9730037D692 /* PhotoDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5D9E2066C9730037D692 /* PhotoDisplayView.swift */; };
 		387B5DA52066D6E00037D692 /* Apeture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DA42066D6E00037D692 /* Apeture.swift */; };
 		387B5DA72066D6E90037D692 /* ShutterSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DA62066D6E90037D692 /* ShutterSpeed.swift */; };
 		387B5DA92066D8560037D692 /* CameraSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DA82066D8560037D692 /* CameraSettings.swift */; };
 		387B5DAC2066D97C0037D692 /* Displayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B5DAB2066D97C0037D692 /* Displayable.swift */; };
 		38A874432070187C00A7A012 /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A874422070187C00A7A012 /* Selectable.swift */; };
-		38AFC7AD206ABF1900A13F41 /* RotaryWheelSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFC7AC206ABF1900A13F41 /* RotaryWheelSlice.swift */; };
-		38FCA3E4206FF2D300C80304 /* Gradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FCA3E3206FF2D300C80304 /* Gradients.swift */; };
+		38A8744520701C2000A7A012 /* CameraSettingsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A8744420701C2000A7A012 /* CameraSettingsLabel.swift */; };
+		38A874472070237300A7A012 /* ImageFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A874462070237300A7A012 /* ImageFilter.swift */; };
+		38A874492070333600A7A012 /* GradientDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A874482070333600A7A012 /* GradientDirection.swift */; };
+		38A8744B2070334C00A7A012 /* GradientColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A8744A2070334C00A7A012 /* GradientColor.swift */; };
+		38AFC7AD206ABF1900A13F41 /* RotaryDialSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFC7AC206ABF1900A13F41 /* RotaryDialSlice.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,22 +65,24 @@
 		381105C9206117B000F2F3E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		381105D62061185F00F2F3E2 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		381105D92061187B00F2F3E2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
-		381105DC206118B100F2F3E2 /* RotaryWheelControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotaryWheelControl.swift; sourceTree = "<group>"; };
-		381105DE206118DD00F2F3E2 /* LensRingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LensRingControl.swift; sourceTree = "<group>"; };
-		381B6C8120617680009858DF /* CameraSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSettingsView.swift; sourceTree = "<group>"; };
+		381105DC206118B100F2F3E2 /* RotaryDial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotaryDial.swift; sourceTree = "<group>"; };
+		381105DE206118DD00F2F3E2 /* LensRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LensRing.swift; sourceTree = "<group>"; };
+		381B6C8120617680009858DF /* SettingsDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDisplayView.swift; sourceTree = "<group>"; };
 		384C56F8206ECA46006E3F29 /* CoreImageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreImageWrapper.swift; sourceTree = "<group>"; };
-		38619A4F2067BEB900898239 /* CIContext+Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIContext+Singleton.swift"; sourceTree = "<group>"; };
+		38619A4F2067BEB900898239 /* SharedCIContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCIContext.swift; sourceTree = "<group>"; };
 		38619A8D206823B800898239 /* WhiteBalance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBalance.swift; sourceTree = "<group>"; };
-		3861ECFD206AE80400D0BD26 /* ExternalDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalDeviceView.swift; sourceTree = "<group>"; };
 		3861ECFF206AE83100D0BD26 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
-		387B5D9E2066C9730037D692 /* ExternalDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalDisplayView.swift; sourceTree = "<group>"; };
+		387B5D9E2066C9730037D692 /* PhotoDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDisplayView.swift; sourceTree = "<group>"; };
 		387B5DA42066D6E00037D692 /* Apeture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apeture.swift; sourceTree = "<group>"; };
 		387B5DA62066D6E90037D692 /* ShutterSpeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutterSpeed.swift; sourceTree = "<group>"; };
 		387B5DA82066D8560037D692 /* CameraSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSettings.swift; sourceTree = "<group>"; };
 		387B5DAB2066D97C0037D692 /* Displayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Displayable.swift; sourceTree = "<group>"; };
 		38A874422070187C00A7A012 /* Selectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
-		38AFC7AC206ABF1900A13F41 /* RotaryWheelSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotaryWheelSlice.swift; sourceTree = "<group>"; };
-		38FCA3E3206FF2D300C80304 /* Gradients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradients.swift; sourceTree = "<group>"; };
+		38A8744420701C2000A7A012 /* CameraSettingsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSettingsLabel.swift; sourceTree = "<group>"; };
+		38A874462070237300A7A012 /* ImageFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFilter.swift; sourceTree = "<group>"; };
+		38A874482070333600A7A012 /* GradientDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientDirection.swift; sourceTree = "<group>"; };
+		38A8744A2070334C00A7A012 /* GradientColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientColor.swift; sourceTree = "<group>"; };
+		38AFC7AC206ABF1900A13F41 /* RotaryDialSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotaryDialSlice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,7 +135,7 @@
 			children = (
 				38CA2C93206FFF3800E4FDDF /* Enums */,
 				387B5DAA2066D8EC0037D692 /* Protocols */,
-				387B5DA32066D6D20037D692 /* Model */,
+				387B5DA32066D6D20037D692 /* Models */,
 				381B6C8020617659009858DF /* Views */,
 				381105DB2061188000F2F3E2 /* Controls */,
 				381105D82061186900F2F3E2 /* Helpers */,
@@ -174,8 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				381105D92061187B00F2F3E2 /* UIView+Extensions.swift */,
-				38FCA3E3206FF2D300C80304 /* Gradients.swift */,
-				38619A4F2067BEB900898239 /* CIContext+Singleton.swift */,
+				38619A4F2067BEB900898239 /* SharedCIContext.swift */,
 				384C56F8206ECA46006E3F29 /* CoreImageWrapper.swift */,
 			);
 			path = Helpers;
@@ -184,9 +187,9 @@
 		381105DB2061188000F2F3E2 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				381105DC206118B100F2F3E2 /* RotaryWheelControl.swift */,
-				38AFC7AC206ABF1900A13F41 /* RotaryWheelSlice.swift */,
-				381105DE206118DD00F2F3E2 /* LensRingControl.swift */,
+				381105DC206118B100F2F3E2 /* RotaryDial.swift */,
+				381105DE206118DD00F2F3E2 /* LensRing.swift */,
+				38A8744420701C2000A7A012 /* CameraSettingsLabel.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -194,23 +197,23 @@
 		381B6C8020617659009858DF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				381B6C8120617680009858DF /* CameraSettingsView.swift */,
-				387B5D9E2066C9730037D692 /* ExternalDisplayView.swift */,
-				3861ECFD206AE80400D0BD26 /* ExternalDeviceView.swift */,
+				381B6C8120617680009858DF /* SettingsDisplayView.swift */,
+				387B5D9E2066C9730037D692 /* PhotoDisplayView.swift */,
 				3861ECFF206AE83100D0BD26 /* CameraView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		387B5DA32066D6D20037D692 /* Model */ = {
+		387B5DA32066D6D20037D692 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				387B5DA82066D8560037D692 /* CameraSettings.swift */,
 				387B5DA42066D6E00037D692 /* Apeture.swift */,
 				387B5DA62066D6E90037D692 /* ShutterSpeed.swift */,
 				38619A8D206823B800898239 /* WhiteBalance.swift */,
+				38AFC7AC206ABF1900A13F41 /* RotaryDialSlice.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		387B5DAA2066D8EC0037D692 /* Protocols */ = {
@@ -225,6 +228,9 @@
 		38CA2C93206FFF3800E4FDDF /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				38A874462070237300A7A012 /* ImageFilter.swift */,
+				38A874482070333600A7A012 /* GradientDirection.swift */,
+				38A8744A2070334C00A7A012 /* GradientColor.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -364,23 +370,25 @@
 			files = (
 				38619A8E206823B800898239 /* WhiteBalance.swift in Sources */,
 				381105A8206117B000F2F3E2 /* AppDelegate.swift in Sources */,
-				381B6C8220617680009858DF /* CameraSettingsView.swift in Sources */,
+				38A8744520701C2000A7A012 /* CameraSettingsLabel.swift in Sources */,
+				38A874492070333600A7A012 /* GradientDirection.swift in Sources */,
+				381B6C8220617680009858DF /* SettingsDisplayView.swift in Sources */,
 				3861ED00206AE83100D0BD26 /* CameraView.swift in Sources */,
-				387B5D9F2066C9730037D692 /* ExternalDisplayView.swift in Sources */,
-				38619A502067BEB900898239 /* CIContext+Singleton.swift in Sources */,
+				387B5D9F2066C9730037D692 /* PhotoDisplayView.swift in Sources */,
+				38A874472070237300A7A012 /* ImageFilter.swift in Sources */,
+				38619A502067BEB900898239 /* SharedCIContext.swift in Sources */,
 				387B5DA92066D8560037D692 /* CameraSettings.swift in Sources */,
-				38AFC7AD206ABF1900A13F41 /* RotaryWheelSlice.swift in Sources */,
-				38FCA3E4206FF2D300C80304 /* Gradients.swift in Sources */,
+				38AFC7AD206ABF1900A13F41 /* RotaryDialSlice.swift in Sources */,
 				387B5DA52066D6E00037D692 /* Apeture.swift in Sources */,
 				387B5DAC2066D97C0037D692 /* Displayable.swift in Sources */,
 				38A874432070187C00A7A012 /* Selectable.swift in Sources */,
-				381105DD206118B100F2F3E2 /* RotaryWheelControl.swift in Sources */,
+				381105DD206118B100F2F3E2 /* RotaryDial.swift in Sources */,
 				387B5DA72066D6E90037D692 /* ShutterSpeed.swift in Sources */,
-				3861ECFE206AE80400D0BD26 /* ExternalDeviceView.swift in Sources */,
-				381105DF206118DD00F2F3E2 /* LensRingControl.swift in Sources */,
+				381105DF206118DD00F2F3E2 /* LensRing.swift in Sources */,
 				384C56F9206ECA46006E3F29 /* CoreImageWrapper.swift in Sources */,
 				381105DA2061187B00F2F3E2 /* UIView+Extensions.swift in Sources */,
 				381105D72061185F00F2F3E2 /* CameraViewController.swift in Sources */,
+				38A8744B2070334C00A7A012 /* GradientColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

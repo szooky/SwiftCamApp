@@ -9,7 +9,7 @@
 import UIKit
 
 public class CameraViewController: UIViewController {
-    let externalDeviceView = ExternalDeviceView()
+    let photoDisplayView = PhotoDisplayView()
     let cameraView = CameraView()
 
     var settings = CameraSettings() {
@@ -22,10 +22,7 @@ public class CameraViewController: UIViewController {
         view.backgroundColor = .white
 
         configureCameraView()
-        configureExternalDeviceView()
-
-        cameraView.shutterSpeedDial.layoutSubviews()
-        cameraView.shutterSpeedDial.round()
+        configurePhotoDisplayView()
     }
 
     private func configureCameraView() {
@@ -36,44 +33,33 @@ public class CameraViewController: UIViewController {
         cameraView.widthAnchor.constraint(equalToConstant: 600.0).isActive = true
         cameraView.heightAnchor.constraint(equalToConstant: 600.0).isActive = true
 
-        cameraView.apetureRingView.lensRingDelegate = self
+        cameraView.apetureRingView.delegate = self
         cameraView.shutterSpeedDial.delegate = self
         cameraView.whiteBalanceDial.delegate = self
-
     }
 
-    private func configureExternalDeviceView() {
-        view.addSubview(externalDeviceView)
-        externalDeviceView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30.0).isActive = true
-        externalDeviceView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        externalDeviceView.widthAnchor.constraint(equalToConstant: 400.0).isActive = true
-        externalDeviceView.heightAnchor.constraint(equalToConstant: 300.0).isActive = true
-    }
-
-    private func updatePhoto() {
-        externalDeviceView.displayView.cameraDidTakePhoto(with: self.settings)
-        print(#function)
+    private func configurePhotoDisplayView() {
+        view.addSubview(photoDisplayView)
+        photoDisplayView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30.0).isActive = true
+        photoDisplayView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        photoDisplayView.widthAnchor.constraint(equalToConstant: 400.0).isActive = true
+        photoDisplayView.heightAnchor.constraint(equalToConstant: 300.0).isActive = true
     }
 }
 
-extension CameraViewController: RotaryWheelDelegate {
-    func didChange(rotaryWheel: RotaryWheelControl, selectedIndex: Int) {
-        switch rotaryWheel {
+extension CameraViewController: SelectableControlDelegate {
+    func didSelect(index: Int, in control: Selectable?) {
+        switch control as? UIView {
         case cameraView.shutterSpeedDial:
-            settings.shutterSpeed = ShutterSpeed.all[selectedIndex]
+            settings.shutterSpeed = ShutterSpeed.all[index]
         case cameraView.whiteBalanceDial:
-            settings.whiteBalance = WhiteBalance.all[selectedIndex]
+            settings.whiteBalance = WhiteBalance.all[index]
+        case cameraView.apetureRingView:
+            settings.apeture = Apeture.all[index]
         default:
             return
         }
 
-        updatePhoto()
-    }
-}
-
-extension CameraViewController: LensRingDelegate {
-    func didScrollTo(selectedIndex: Int) {
-        settings.apeture = Apeture.all[selectedIndex]
-        updatePhoto()
+        photoDisplayView.cameraDidTakePhoto(with: settings)
     }
 }

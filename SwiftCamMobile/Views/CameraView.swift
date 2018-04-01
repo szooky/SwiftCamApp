@@ -16,20 +16,21 @@ class CameraView: UIView {
         return imageView
     }()
 
-    let cameraSettingsView = CameraSettingsView()
-    let shutterSpeedDial = RotaryWheelControl(components: ShutterSpeed.all)
-    let whiteBalanceDial = RotaryWheelControl(components: WhiteBalance.all)
-    let apetureRingView = LensRingControl(components: Apeture.all)
+    let cameraSettingsView = SettingsDisplayView()
+    let shutterSpeedDial = RotaryDial(components: ShutterSpeed.all)
+    let whiteBalanceDial = RotaryDial(components: WhiteBalance.all)
+    let apetureRingView = LensRing(components: Apeture.all)
 
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         isUserInteractionEnabled = true
+
         configureCameraImageView()
         configureCameraSettingsScreen()
         configureShutterSpeedDial()
         configureWhiteBalanceDial()
-        addApetureRing()
+        configureApetureRing()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -38,12 +39,8 @@ class CameraView: UIView {
 
     private func configureCameraImageView() {
         addSubview(cameraImageView)
-        cameraImageView.translatesAutoresizingMaskIntoConstraints = false
         cameraImageView.isUserInteractionEnabled = true
-        cameraImageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        cameraImageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        cameraImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        cameraImageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        cameraImageView.edges(equalTo: self)
     }
 
     private func configureCameraSettingsScreen() {
@@ -67,7 +64,6 @@ class CameraView: UIView {
         shutterSpeedDial.configureView()
     }
 
-
     private func configureWhiteBalanceDial() {
         cameraImageView.addSubview(whiteBalanceDial)
 
@@ -80,7 +76,7 @@ class CameraView: UIView {
         whiteBalanceDial.configureView()
     }
 
-    private func addApetureRing() {
+    private func configureApetureRing() {
         cameraImageView.addSubview(apetureRingView)
         apetureRingView.translatesAutoresizingMaskIntoConstraints = false
         apetureRingView.leadingAnchor.constraint(equalTo: cameraImageView.leadingAnchor, constant: 125.0).isActive = true

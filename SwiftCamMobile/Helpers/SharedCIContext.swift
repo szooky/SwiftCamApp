@@ -8,8 +8,8 @@
 
 import UIKit
 
-class CIContextSingleton {
-    static let sharedInstance = CIContextSingleton()
+class SharedCIContext {
+    static let sharedInstance = SharedCIContext()
     let ciContext  = CIContext(options: nil)
     private init() {}
 }

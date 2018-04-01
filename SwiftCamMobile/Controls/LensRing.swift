@@ -8,23 +8,22 @@
 
 import UIKit
 
-protocol LensRingDelegate: class {
-    func didScrollTo(selectedIndex: Int)
-}
-
-class LensRingControl: UIView {
-    weak var lensRingDelegate: LensRingDelegate?
-    let components: [Displayable]
+class LensRing: UIView, Selectable {
+    weak var delegate: SelectableControlDelegate?
+    var components: [Displayable]
     var componentButtons = [UIButton]()
     var currentIndex = 0 {
         didSet {
-            lensRingDelegate?.didScrollTo(selectedIndex: currentIndex)
+            delegate?.didSelect(index: currentIndex, in: self)
         }
     }
 
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.delaysContentTouches = true
+        scrollView.bounces = false
         return scrollView
     }()
 
@@ -42,15 +41,8 @@ class LensRingControl: UIView {
         return stackView
     }()
 
-    let leftGradientView: UIView = {
-        let view = UIView()
-        return view
-    }()
-
-    let rightGradientView: UIView = {
-        let view = UIView()
-        return view
-    }()
+    let leftGradientView = UIView()
+    let rightGradientView = UIView()
 
     init(components: [Displayable]) {
         self.components = components
@@ -84,17 +76,9 @@ class LensRingControl: UIView {
     }
 
     private func configureScrollView() {
-        scrollView.delegate = self
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.delaysContentTouches = true
-
         addSubview(scrollView)
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        scrollView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        scrollView.delegate = self
+        scrollView.edges(equalTo: self)
     }
 
     private func configureComponentsStackView() {
@@ -104,9 +88,9 @@ class LensRingControl: UIView {
         for (index, component) in components.enumerated() {
             let button = UIButton()
             button.setTitle(component.description, for: .normal)
+            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
             button.tag = index
             button.addTarget(self, action: #selector(componentButtonClicked(_:)), for: .touchUpInside)
-            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
 
             componentsStackView.addArrangedSubview(button)
             componentButtons.append(button)
@@ -160,7 +144,7 @@ class LensRingControl: UIView {
         let buttonCenterOnSuperview = convert(button.center, to: superview)
         let pointToScroll = CGPoint(x: buttonCenterOnSuperview.x, y: scrollView.contentOffset.y)
         scrollView.setContentOffset(pointToScroll, animated: true)
-        lensRingDelegate?.didScrollTo(selectedIndex: button.tag)
+        currentIndex = button.tag
     }
 
     private func scrollToNearestButton() {
@@ -182,7 +166,7 @@ class LensRingControl: UIView {
 
 }
 
-extension LensRingControl: UIScrollViewDelegate {
+extension LensRing: UIScrollViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
            scrollToNearestButton()
